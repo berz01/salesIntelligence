@@ -6,14 +6,15 @@ var api = express.Router();
 
 api.use(bodyParser.json()); // support json encoded bodies
 api.use(bodyParser.urlencoded({
-    extended: true
+  extended: true
 }));
 
-api.get("/maincall",  function(req, res){
-    console.log("hit facebook");
-    var data = {"stuff":"to look at"}; 
-    res.send(data);
- });
+api.get("/maincall", function(req, res) {
+  console.log("hit facebook");
+  var data = {
+    "stuff": "to look at"
+  };
+  res.send(data);
 });
 
 module.exports = api;
