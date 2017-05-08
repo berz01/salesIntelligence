@@ -13,11 +13,13 @@ const app = express();
 // Setting view engine
 app.set('view engine', 'ejs');
 
-// Add your automatic client id and client secret here or as environment variables
-const AUTOMATIC_CLIENT_ID = process.env.AUTOMATIC_CLIENT_ID || 'key_default';
-const AUTOMATIC_CLIENT_SECRET = process.env.AUTOMATIC_CLIENT_SECRET || 'key_default';
+// TODO: create a config file that's ignore in the git repo but extracts the key values
+// needed for the api calls or set them to environment variables like what's done
+// below
+const OTHER_API_ID = process.env.AUTOMATIC_CLIENT_ID; // || configFile.AUTOMATIC_CLIENT_ID
+const OTHER_API_SECRET = process.env.AUTOMATIC_CLIENT_SECRET; // || configFile.AUTOMATIC_CLIENT_SECRET
 
-//
+// TODO: how to structure an oauth client
 // const oauth2 = require('simple-oauth2')({
 //     clientID: AUTOMATIC_CLIENT_ID,
 //     clientSecret: AUTOMATIC_CLIENT_SECRET,
@@ -25,7 +27,8 @@ const AUTOMATIC_CLIENT_SECRET = process.env.AUTOMATIC_CLIENT_SECRET || 'key_defa
 //     tokenPath: '/oauth/access_token'
 // });
 
-// Enable sessions
+// TODO: determine if sessions are necessary. I don't think they are since node isn't handling the front end
+// but it's here for knowledge away
 app.use(session({
     secret: 'keyboard cat',
     resave: false,
@@ -46,6 +49,6 @@ app.get('/api/v1/*', function(req, res, next) {
 app.use('/api/v1', require('./v1/routes/sales-intel'));
 
 // Start server
-var appPages = app.listen(port, function() {
-    console.log("\nappPages now running on port", appPages.address().port);
+var salesIntelServer = app.listen(port, function() {
+    console.log("\nThe sales intel server is now running on port", salesIntelServer.address().port);
 });
