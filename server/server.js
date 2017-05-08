@@ -13,17 +13,17 @@ const app = express();
 // Setting view engine
 app.set('view engine', 'ejs');
 
-
 // Add your automatic client id and client secret here or as environment variables
-const AUTOMATIC_CLIENT_ID = process.env.AUTOMATIC_CLIENT_ID || '2ee3c7c2f4b652fc1ee1';
-const AUTOMATIC_CLIENT_SECRET = process.env.AUTOMATIC_CLIENT_SECRET || 'ba1590bcd38c31a310d79726e6be9a89d383aa69';
+const AUTOMATIC_CLIENT_ID = process.env.AUTOMATIC_CLIENT_ID || 'key_default';
+const AUTOMATIC_CLIENT_SECRET = process.env.AUTOMATIC_CLIENT_SECRET || 'key_default';
 
-const oauth2 = require('simple-oauth2')({
-    clientID: AUTOMATIC_CLIENT_ID,
-    clientSecret: AUTOMATIC_CLIENT_SECRET,
-    site: 'https://accounts.automatic.com',
-    tokenPath: '/oauth/access_token'
-});
+//
+// const oauth2 = require('simple-oauth2')({
+//     clientID: AUTOMATIC_CLIENT_ID,
+//     clientSecret: AUTOMATIC_CLIENT_SECRET,
+//     site: 'https://accounts.automatic.com',
+//     tokenPath: '/oauth/access_token'
+// });
 
 // Enable sessions
 app.use(session({
@@ -32,15 +32,18 @@ app.use(session({
     saveUninitialized: true
 }));
 
-// New API
-app.use('/api/v1/automatic', require('./v1/routes/automatic'));
-app.use('/api/v1/smartcrash', require('./v1/routes/smartcrash'));
-
+// TODO: make the filter for /api/* instead of /api/v1/* after you remove
+// the examples below in app.use()
 // Filters
 app.get('/api/v1/*', function(req, res, next) {
     console.log("Hit Auth Filter For Access");
     next();
 });
+
+// New API
+// TODO: examlple - app.use('/api/v1/automatic', require('./v1/routes/automatic'));
+// TODO: examlple - app.use('/api/v1/smartcrash', require('./v1/routes/smartcrash'));
+app.use('/api/v1', require('./v1/routes/sales-intel'));
 
 // Start server
 var appPages = app.listen(port, function() {
