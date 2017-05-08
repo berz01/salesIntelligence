@@ -46,7 +46,10 @@ app.get('/api/v1/*', function(req, res, next) {
 // New API
 // TODO: examlple - app.use('/api/v1/automatic', require('./v1/routes/automatic'));
 // TODO: examlple - app.use('/api/v1/smartcrash', require('./v1/routes/smartcrash'));
-app.use('/api/v1', require('./v1/routes/sales-intel'));
+app.use('/api/v1/linkedIn', require('./v1/controllers/linkedin/linkedin1.js'));
+app.use('/api/v1/twitter', require('./v1/controllers/twitter/twitter1.js'));
+app.use('/api/v1/facebook', require('./v1/controllers/facebook/facebook1.js'));
+app.use('/api/v1/instagram', require('./v1/controllers/instagram/instagram1.js'));
 
 // Start server
 var salesIntelServer = app.listen(port, function() {
