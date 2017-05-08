@@ -4,7 +4,6 @@ const express = require('express');
 const session = require('express-session');
 const Promise = require('bluebird');
 const https = require('https');
-const autopromise = require('./v1/controllers/automatic/module.automatic.js');
 
 // Server settings
 const port = process.env.PORT || 8080;
@@ -43,10 +42,10 @@ app.get('/api/v1/*', function(req, res, next) {
     next();
 });
 
-app.get('/api/v1/linkedIn', require('./v1/routes/linkedin.js'));
-app.get('/api/v1/twitter', require('./v1/routes/twitter.js'));
-app.get('/api/v1/facebook', require('./v1/routes/facebook.js'));
-app.get('/api/v1/instagram', require('./v1/routes/instagram.js'));
+app.use('/api/v1/linkedIn', require('./v1/routes/linkedin.js'));
+app.use('/api/v1/twitter', require('./v1/routes/twitter.js'));
+app.use('/api/v1/facebook', require('./v1/routes/facebook.js'));
+app.use('/api/v1/instagram', require('./v1/routes/instagram.js'));
 
 // Start server
 var salesIntelServer = app.listen(port, function() {

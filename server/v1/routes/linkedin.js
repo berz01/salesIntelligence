@@ -10,7 +10,9 @@ api.use(bodyParser.urlencoded({
 }));
 
 api.get("/maincall",  function(req, res){
-    res.body = {"stuff":"to look at"};
+  console.log("hit linkedin");
+  var data = {"stuff":"to look at"};
+  res.send(data);
 });
 
 module.exports = api;

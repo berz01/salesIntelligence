@@ -9,19 +9,10 @@ api.use(bodyParser.urlencoded({
     extended: true
 }));
 
-// TODO: use the other controllers from Car2Claim as examples. since we're not going to be hot swaping apis
-// just use the following below as a template for calls
-
-// api.get("/dashboard",  function(req, res){
-//   var allDataNeeded = Promise.all([twitter.tweets(req.twitterHeaders), facebook.status(req.facebookHeaders), linkedIn.jobs(req.linkedInHeaders)])
-//
-//   allDataNeeded(req).spread(function(tweets, facebookStatus, jobs){
-//       // setup response object here
-//   });
-// });
-
 api.get("/maincall",  function(req, res){
-    res.body = {"stuff":"to look at"};
+  console.log("hit twitter");
+  var data = {"stuff":"to look at"};
+  res.send(data);
 });
 
 module.exports = api;

@@ -10,7 +10,10 @@ api.use(bodyParser.urlencoded({
 }));
 
 api.get("/maincall",  function(req, res){
-    res.body = {"stuff":"to look at"};
+    console.log("hit facebook");
+    var data = {"stuff":"to look at"}; 
+    res.send(data);
+ });
 });
 
 module.exports = api;
