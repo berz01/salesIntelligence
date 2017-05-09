@@ -5,7 +5,7 @@
  */
 
 import React, {Component} from 'react';
-import { 
+import {
   StyleSheet,
   Image,
   Text,
@@ -18,6 +18,8 @@ import {
 import Nav from './global-widgets/nav'
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Iconz from 'react-native-vector-icons/Ionicons';
+
+var {height, width} = Dimensions.get('window');
 
 export default class Profile extends Component {
   constructor(props) {
@@ -38,7 +40,7 @@ export default class Profile extends Component {
         <ScrollView style={styles.container}>
           <Image source ={require('../images/profile.jpg')} resizeMode="stretch" style={{
             height: 350,
-            width: 50
+            width: width
           }}/>
           <View style={[
             styles.row, {

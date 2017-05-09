@@ -11,7 +11,7 @@ import {
   Text,
   View
 } from 'react-native';
- 
+
 import Nav from './global-widgets/nav'
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Iconz from 'react-native-vector-icons/Ionicons';
@@ -19,8 +19,9 @@ import Iconz from 'react-native-vector-icons/Ionicons';
 export default class Home extends Component {
   render() {
     return (
+      <View style={styles.base}>
+      <Nav toProfile = {() => this.props.navigator.replace({id:'profile'})} />
       <View style={styles.container}>
-        <Nav toProfile = {() => this.props.navigator.replace({id:'profile'})} />
         <Text style={styles.welcome}>
           Welcome to React Native!
         </Text>
@@ -32,11 +33,15 @@ export default class Home extends Component {
           Shake or press menu button for dev menu
         </Text>
       </View>
+    </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  base: {
+    flex: 1
+  },
   container: {
     flex: 1,
     justifyContent: 'center',

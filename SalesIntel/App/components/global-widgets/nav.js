@@ -15,7 +15,7 @@ export default class Nav extends Component {
     return (
       <View style={styles.container}>
         <TouchableOpacity onPress ={this.props.toProfile}>
-          <Iconz name="ios-person" color="#888" size={25} style={{
+          <Iconz name="md-person" color="#888" size={25} style={{
             margin: 10
           }}/>
         </TouchableOpacity>
@@ -24,7 +24,7 @@ export default class Nav extends Component {
           height: 30
         }}/>
         <TouchableOpacity onPress ={this.props.chat}>
-          <Iconz name="ios-chatboxes-outline" color="#555" size={25} style={{
+          <Iconz name="md-chatboxes" color="#555" size={25} style={{
             margin: 10
           }}/>
         </TouchableOpacity>
