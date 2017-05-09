@@ -21,7 +21,7 @@ api.get("/maincall",  function(req, res){
     method: "GET",
     json: true
   }, function(error, response, body) {
-    res.send(response.body);
+    res.send(body);
   });
 });
 
