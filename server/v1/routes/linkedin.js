@@ -12,7 +12,7 @@ api.use(bodyParser.urlencoded({
 
 api.get("/maincall",  function(req, res){
 
-  var profileParamList = ["id", "firstName", "phonetic-first-name", "lastName", "phonetic-last-name", "maiden-name", "formatted-phonetic-name", "headline", "industry", "summary", "positions", "skills", "location", "specialties", "num-connections", "current-share"];
+  var profileParamList = ["id", "firstName", "phonetic-first-name", "lastName", "phonetic-last-name", "maiden-name", "formatted-phonetic-name", "headline", "industry", "summary", "positions", "skills", "location", "specialties", "num-connections", "current-share", "picture-url"];
   var accessToken = "AQWIUJK4biSi45Ds6O5IG7ykcwIpIO3CYR6FqHGk5rWfSVlZv3Eo-WU9K_Aq0R3jLnUGlx6uALd_etUem2xaKyfJJ51vG7FArSMijzmRcdMEdXiEC8wdOy6piulNx4HNQqsfErxMIgluEhgzxpPYPrQjOj6kBP3s6ydmVEaBX4WuxYlAGM4";
   var format = "json";
 
