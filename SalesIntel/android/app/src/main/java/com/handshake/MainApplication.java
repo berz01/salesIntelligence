@@ -1,4 +1,4 @@
-package com.salesintel;
+package com.handshake;
 
 import android.app.Application;
 
