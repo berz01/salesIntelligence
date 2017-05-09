@@ -15,219 +15,99 @@ import {
   ScrollView
 } from 'react-native';
 
+import {
+  MKButton,
+  MKColor,
+  MKIconToggle,
+  getTheme,
+  setTheme
+} from 'react-native-material-kit';
+
 import Nav from './global-widgets/nav'
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Iconz from 'react-native-vector-icons/Ionicons';
 
 var {height, width} = Dimensions.get('window');
 
+const theme = getTheme();
+const styles = require('../styles');
+
+//setTheme({checkboxStyle: {
+//  fillColor: MKColor.Teal,
+//  borderOnColor: MKColor.Teal,
+//  borderOffColor: MKColor.Teal,
+//  rippleColor: `rgba(${MKColor.RGBTeal},.15)`,
+//}});
+
 export default class Profile extends Component {
   constructor(props) {
     super(props)
-
-    this.state = {
-      friends: 1098
-    }
-
   }
 
   render() {
+    var base64Icon = 'http://www.getmdl.io/assets/demos/welcome_card.jpg';
+    var action = (<Text> My action</Text>);
+    var menu = (
+       <MKIconToggle
+        checked={true}
+        onCheckedChange={this._onIconChecked}
+        onPress={this._onIconClicked}
+        >
+        <Text pointerEvents="none"
+              style={styles.toggleTextOff}>Off</Text>
+        <Text state_checked={true}
+              pointerEvents="none"
+              style={[styles.toggleText, styles.toggleTextOn]}>On</Text>
+      </MKIconToggle>
+    );
+
+
     return (
-      <View style={{
-        flex: 1
-      }}>
-        <Nav type="profile" onPress= {() => this.props.navigator.replace({id:'home'})}/>
-        <ScrollView style={styles.container}>
-          <Image source ={require('../images/profile.jpg')} resizeMode="stretch" style={{
-            height: 350,
-            width: width
-          }}/>
-          <View style={[
-            styles.row, {
-              marginTop: 15
-            }
-          ]}>
-            <Text style={{
-              fontSize: 19,
-              fontWeight: '400'
-            }}>Samuel,
-            </Text>
-            <Text style={{
-              fontSize: 21,
-              fontWeight: '300',
-              marginBottom: -2
-            }}>23</Text>
-          </View>
-          <View style={styles.row}>
-            <Text style={{
-              color: '#444',
-              fontSize: 15
-            }}>Unappers Creative</Text>
-          </View>
-          <View style={styles.row}>
-            <Text style={{
-              color: '#777',
-              fontSize: 11
-            }}>less than a mile away</Text>
-          </View>
-          <View style={styles.description}>
-            <Text style={{
-              color: '#555'
-            }}>We hook up, you do my laundry, I promise to call you but never really.</Text>
-          </View>
-          <View style ={styles.commons}>
-            <Text style={styles.title}>
-              {this.state.friends}
-              for Common Connections
-            </Text>
-            <Text style={{
-              marginTop: 10,
-              fontSize: 14,
-              color: '#666',
-              fontWeight: "400"
-            }}>We compare your Facebook friends with those of your matches to display any common connections</Text>
-          </View>
-          <View style ={styles.commons}>
-            <Text style={styles.title}>
-              Instagram Photos
-            </Text>
-            <ScrollView horizontal={true}>
-              <View style ={{}}>
-                <Image source ={require('../images/profile.jpg')} resizeMode="stretch" style={{
-                  height: 100,
-                  width: 100,
-                  margin: 5
-                }}/>
-                <Image source ={require('../images/profile.jpg')} resizeMode="stretch" style={{
-                  height: 100,
-                  width: 100,
-                  margin: 5
-                }}/>
-              </View>
-              <View style ={{}}>
-                <Image source ={require('../images/profile.jpg')} resizeMode="stretch" style={{
-                  height: 100,
-                  width: 100,
-                  margin: 5
-                }}/>
-                <Image source ={require('../images/profile.jpg')} resizeMode="stretch" style={{
-                  height: 100,
-                  width: 100,
-                  margin: 5
-                }}/>
-              </View>
-              <View style ={{}}>
-                <Image source ={require('../images/profile.jpg')} resizeMode="stretch" style={{
-                  height: 100,
-                  width: 100,
-                  margin: 5
-                }}/>
-                <Image source ={require('../images/profile.jpg')} resizeMode="stretch" style={{
-                  height: 100,
-                  width: 100,
-                  margin: 5
-                }}/>
-              </View>
-              <View style ={{}}>
-                <Image source ={require('../images/profile.jpg')} resizeMode="stretch" style={{
-                  height: 100,
-                  width: 100,
-                  margin: 5
-                }}/>
-                <Image source ={require('../images/profile.jpg')} resizeMode="stretch" style={{
-                  height: 100,
-                  width: 100,
-                  margin: 5
-                }}/>
-              </View>
-              <View style ={{}}>
-                <Image source ={require('../images/profile.jpg')} resizeMode="stretch" style={{
-                  height: 100,
-                  width: 100,
-                  margin: 5
-                }}/>
-                <Image source ={require('../images/profile.jpg')} resizeMode="stretch" style={{
-                  height: 100,
-                  width: 100,
-                  margin: 5
-                }}/>
-              </View>
-              <View style ={{}}>
-                <Image source ={require('../images/profile.jpg')} resizeMode="stretch" style={{
-                  height: 100,
-                  width: 100,
-                  margin: 5
-                }}/>
-                <Image source ={require('../images/profile.jpg')} resizeMode="stretch" style={{
-                  height: 100,
-                  width: 100,
-                  margin: 5
-                }}/>
-              </View>
-            </ScrollView>
-          </View>
-        </ScrollView>
+      <View style={styles.container}>
+        <Image style={custom.bgImage} source={require('../images/background.jpg')}>
+          <ScrollView style={styles.scrollContainer}>
+            <View style={custom.headerCardStyle}>
+                <Text style={[theme.cardContentStyle, {padding:0}, custom.contentText]}>
+                  Outdoors. Rock Climbing. Father. - @rockman
+                </Text>
+            </View>
+          </ScrollView>
+        </Image>
       </View>
     )
   }
 }
-//onPress = {() => this.renderNope()}
 
-const styles = StyleSheet.create({
-  container: {
+const custom = StyleSheet.create({
+  bgImage: {
     flex: 1,
-
-    backgroundColor: '#f7f7f7'
-  },
-  row: {
-    flexDirection: 'row',
-    margin: 15,
-    marginBottom: 0,
-    marginTop: 5,
-    alignItems: 'flex-end'
-  },
-  title: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: '#333'
-  },
-  commons: {
-    padding: 15
-  },
-  buttons: {
-    width: 80,
-    height: 80,
-    borderWidth: 10,
-    borderColor: '#e7e7e7',
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 40
+    width: null,
+    height: null
   },
-  description: {
-    padding: 15,
-    borderTopWidth: 1,
-    borderBottomWidth: 1,
-    borderColor: '#e3e3e3',
-    marginTop: 10,
-    marginBottom: 10
-  },
-  buttonSmall: {
-    width: 50,
-    height: 50,
-    borderWidth: 10,
-    borderColor: '#e7e7e7',
+  contentText:{
+    color: '#ffffff',
+    minHeight: 50,
+    minWidth: width * 0.9,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 25
+    fontSize: 16
   },
-  card: {
+  headerCardStyle: {
     flex: 1,
-    alignItems: 'center',
-    alignSelf: 'center',
-    borderWidth: 2,
-    borderColor: '#e3e3e3',
-    width: 350,
-    height: 420
+    marginTop: height * 0.05,
+    marginHorizontal: width * 0.05,
+    backgroundColor: '#303030',
+    borderRadius: 2,
+    borderColor: '#303030',
+    borderWidth: 1,
+    shadowColor: 'rgba(0, 0, 0, 0.12)',
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    shadowOffset: {
+      height: 1,
+      width: 2
+    }
   }
-
 });

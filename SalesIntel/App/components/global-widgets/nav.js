@@ -20,11 +20,11 @@ export default class Nav extends Component {
           }}/>
         </TouchableOpacity>
         <Image source ={require('../../images/logo.png')} resizeMode="contain" style={{
-          width: 100,
-          height: 30
+          width: 150,
+          height: 35
         }}/>
         <TouchableOpacity onPress ={this.props.chat}>
-          <Iconz name="md-chatboxes" color="#555" size={25} style={{
+          <Iconz name="md-calendar" color="#555" size={25} style={{
             margin: 10
           }}/>
         </TouchableOpacity>
@@ -54,7 +54,7 @@ export default class Nav extends Component {
     );
   }
 
-  message() {
+  calendar() {
     return (
       <View style={styles.container}>
         <TouchableOpacity onPress ={this.props.onPress}>
@@ -77,9 +77,9 @@ export default class Nav extends Component {
     );
   }
   render() {
-    if (this.props.type == "message") {
+    if (this.props.type == "calendar") {
       return (
-        <View>{this.message()}</View>
+        <View>{this.calendar()}</View>
       );
     } else if (this.props.type == "profile") {
       return (
@@ -97,10 +97,11 @@ const styles = StyleSheet.create({
   container: {
     height: 60,
     flexDirection: 'row',
+    marginTop: 10,
     paddingTop: 10,
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: 'rgba(0,0,0,0.1)',
     borderBottomWidth: 1,
     borderColor: 'rgba(0,0,0,0.1)'
   }
