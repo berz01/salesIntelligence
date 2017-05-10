@@ -43,11 +43,15 @@ api.use(bodyParser.urlencoded({
 //   });
 // });
 
+api.get('/', function(req, res) {
 
-api.get('/searchPinterestPinsByUser', function(req, res) {
-    console.log('inside pinterest call');
+    var query  = require('url').parse(req.url, true).query;
+    var boardId = req.query.boardId;
+
+    console.log("retrieving pins for boardId " + boardId )
+
     request({
-        url: "https://api.pinterest.com/v1/users/user/?access_token=ARzyzh0Ciwx90VIEJZFdNXKZsYX5FL1E8_J22dZD_-qh3yA2zwAAAAA&fields=first_name%2Cid%2Clast_name%2Curl%2Cbio%2Cimage%2Cusername",
+        url: "https://api.pinterest.com/v1/boards/" + boardId + "/pins/?access_token=ARzyzh0Ciwx90VIEJZFdNXKZsYX5FL1E8_J22dZD_-qh3yA2zwAAAAA",
         method: "GET",
         headers: {
           //authorization : 'ARzyzh0Ciwx90VIEJZFdNXKZsYX5FL1E8_J22dZD_-qh3yA2zwAAAAA'
@@ -59,9 +63,7 @@ api.get('/searchPinterestPinsByUser', function(req, res) {
         res.send(body);
 
     });
-    console.log(res);
+    // console.log(res);
 });
-
-
 
 module.exports = api;

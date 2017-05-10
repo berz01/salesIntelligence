@@ -46,7 +46,8 @@ app.use('/api/v1/linkedIn', require('./v1/routes/linkedin.js'));
 app.use('/api/v1/twitter', require('./v1/routes/twitter.js'));
 app.use('/api/v1/facebook', require('./v1/routes/facebook.js'));
 app.use('/api/v1/instagram', require('./v1/routes/instagram.js'));
-app.use('/api/v1/pinterest', require('./v1/routes/pinterest.js'));
+app.use('/api/v1/pinterestBoards', require('./v1/routes/pinterestBoards.js'));
+app.use('/api/v1/pinterestPins', require('./v1/routes/pinterestPins.js'));
 
 // Start server
 var salesIntelServer = app.listen(port, function() {
