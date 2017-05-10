@@ -1,6 +1,5 @@
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
+ * Handshake 
  * @flow
  */
 
@@ -24,7 +23,7 @@ export default class Nav extends Component {
           height: 35
         }}/>
         <TouchableOpacity onPress ={this.props.chat}>
-          <Iconz name="md-calendar" color="#555" size={25} style={{
+          <Iconz name="md-search" color="#555" size={25} style={{
             margin: 10
           }}/>
         </TouchableOpacity>

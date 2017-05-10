@@ -46,9 +46,6 @@ module.exports = StyleSheet.create({
   container: {
     flex: 1
   },
-  scrollContainer: {
-    flex: 1
-  },
   row: {
     flexDirection: 'row',
     margin: 15,
