@@ -25,41 +25,23 @@ import {
 
 import Nav from './global-widgets/nav'
 import IconA from 'react-native-vector-icons/FontAwesome';
+import Api from '../actions/handshake.api';
 
 var {height, width} = Dimensions.get('window');
 
 const theme = getTheme();
 const styles = require('../styles');
-var feed = [
-  {
-    network: 'facebook',
-    info: "Kids are Samantha (age 9) & Robert (age 11)",
-    img: null
-  }, {
-    network: 'facebook',
-    info: "Married to Jane Smith on January 21, 2009",
-    img: null
-  }, {
-    network: 'linkedin',
-    info: "Started at Some Firm in June 06, 2016",
-    img: null
-  }, {
-    network: 'instagram',
-    info: "",
-    img: null
-  }, {
-    network: 'twitter',
-    info: "i lost my dad in walmart",
-    img: null
-  }
-];
+
 
 export default class Profile extends Component {
   constructor(props) {
     super(props);
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+
     this.state = {
-      socialData: ds.cloneWithRows(feed)
+      socialData: ds.cloneWithRows([]),
+      profileData: {},
+      profileHeadline: {}
     };
   }
 
@@ -75,26 +57,39 @@ export default class Profile extends Component {
     }
   }
 
-  render() {
+  componentDidMount(){
+    var _this = this;
+    Api.getProfileStub()
+    .then(data => {
+        _this.setState({
+          socialData: this.state.socialData.cloneWithRows(data.feed),
+          profileData: data.profileData,
+          profileHeadline: data.profileHeadline
+        });
+    })
+    .catch(e => e)
+  }
 
+  render() {
+    let profileUri = this.state.profileData.pictureUri;
     return (
       <View style={styles.container}>
         <Image style={custom.bgImage} source={require('../images/background.jpg')}>
           <ScrollView style={custom.scrollViewStyle}>
             <View style={custom.headerCardStyle}>
                 <Text style={[theme.cardContentStyle, custom.heroText]}>
-                  Outdoors. Rock Climbing. Father. - @rockman
+                  {this.state.profileHeadline.info}
                 </Text>
             </View>
             <View style={custom.profileCardStyle}>
                 <View style={custom.profileHeaderContentStyle}>
-                  <Image style={custom.imageCircle} source={require('../images/profile.jpg')}/>
+                  <Image style={custom.imageCircle} source={{uri: profileUri}}/>
                   <View style={custom.profileInfo}>
                     <Text style={custom.name}>
-                      John Smith
+                      {this.state.profileData.name}
                     </Text>
                     <Text style={custom.occupation}>
-                      Senior Accountant at Some Firm
+                      {this.state.profileData.occupation}
                     </Text>
                   </View>
                   <View style={custom.profileNetworks}>
@@ -110,6 +105,7 @@ export default class Profile extends Component {
                     Insights
                   </Text>
                   <ListView
+                    enableEmptySections={true}
                     dataSource={this.state.socialData}
                     renderRow={(rowData) =>
                       <View style={{flex:1,flexDirection:'row'}}>
