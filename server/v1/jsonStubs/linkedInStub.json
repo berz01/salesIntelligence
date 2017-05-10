@@ -1,0 +1,79 @@
+{
+  "currentShare": {
+    "author": {
+      "firstName": "Barrett",
+      "id": "ycj4ndAhBx",
+      "lastName": "Davis"
+    },
+    "comment": "Looking for a great way to track tasks/to do lists across platforms. What tools/stacks is everyone using? Also, process? Checking every morning? alerts etc.\n\nThe life of the ultra busy is a mess so far",
+    "id": "s6261610283693797376",
+    "source": {
+      "serviceProvider": {
+        "name": "LINKEDIN"
+      }
+    },
+    "timestamp": 1492884226000,
+    "visibility": {
+      "code": "anyone"
+    }
+  },
+  "firstName": "Barrett",
+  "headline": "Pushing the edge on product development!",
+  "id": "ycj4ndAhBx",
+  "industry": "Information Technology and Services",
+  "lastName": "Davis",
+  "location": {
+    "country": {
+      "code": "us"
+    },
+    "name": "Greater Atlanta Area"
+  },
+  "numConnections": 406,
+  "pictureUrl": "https://media.licdn.com/mpr/mprx/0_t4BNFceML2QAiE_WNpiq7ALMQgn25JCN-piVTCjZ5pUShWi4OW7VizWMi2F25WA4RW7NfAQJdVVD6ggLZwtefiIzuVVu6gbkZwtBXGO4bRfh2wy4qVXJknrd27hy7grvAH9Z_pjrS5y",
+  "positions": {
+    "_total": 2,
+    "values": [
+      {
+        "company": {
+          "name": "NterNow"
+        },
+        "id": 844088503,
+        "isCurrent": true,
+        "location": {
+          "name": "Atlanta"
+        },
+        "startDate": {
+          "month": 8,
+          "year": 2016
+        },
+        "summary": "A powerful new real estate product that allows home buyers to view properties on-demand! No agents needed!\n\nwww.NterNow.com\n",
+        "title": "COO/CTO"
+      },
+      {
+        "company": {
+          "id": 2381,
+          "industry": "Insurance",
+          "name": "State Farm",
+          "size": "10001+",
+          "type": "Privately Held"
+        },
+        "id": 844087683,
+        "isCurrent": true,
+        "location": {
+          "country": {
+            "code": "us",
+            "name": "United States"
+          },
+          "name": "Greater Atlanta Area"
+        },
+        "startDate": {
+          "month": 6,
+          "year": 2015
+        },
+        "summary": "I'm currently a developer at State Farm. Join the farm we're hiring! It's a fabulous place to be a developer. Some great innovations are going to come out of new atlanta office!! ",
+        "title": "Software Developer"
+      }
+    ]
+  },
+  "summary": "A young tech entrepreneur trying to change the real estate from the bottom-up. A hardware driven platform that will forever change how the real estate industry does business. \n\nwww.NterNow.com"
+}
