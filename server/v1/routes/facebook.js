@@ -10,8 +10,13 @@ api.use(bodyParser.urlencoded({
   extended: true
 }));
 
-var profileParamList = "fields=id,family,name,birthday,age_range,cover,favorite_teams,favorite_athletes,gender,hometown,education,interested_in,languages,email,location,political,relationship_status,religion,timezone,sports,website,work,about";
-var accessToken = "EAACEdEose0cBAO9moEZASZC0u9QbZArnpl0OxItdBQYJ08Jhg6jPZCsdsvepRhwPPNU2LTY3mJmDbV5mfAmkLjyeufHcHuABTfqjR8NcmVaZBOL0EW68kZARWQGV0QxwB0F6blQQLSZCCKZA3tBorYhVOgjwzZAgd2rrZAvczPEvcQjoUBZCRvMRmESE3hZC8Uwl7ngZD"
+// how to get access token !!
+// must loggin to my app id
+// https://developers.facebook.com/tools/accesstoken/
+
+
+var profileParamList = "fields=id,photos.limit(4){link,name,id,comments.limit(0)},family,name,birthday,cover,favorite_teams,favorite_athletes,gender,hometown,education,interested_in,languages,location,political,relationship_status,religion,timezone,sports,website,work,about";
+var accessToken = "EAACEdEose0cBAFvbJdzqKMlXWjraxMHzh499tVZAH0BhdWD8bZB8WZCyvv5CruNOCqgSvUNG0R71wxOrXAGZC8oHW3tMacSxV0mDTlXoxaVrCFj2BWy7HUEwDrTHd2AvFZChcpE8sfAKQ6Tsw56ZBxf8N802FyLq7ZAWARe01t4YiKR23uPG8LbZAAbfuSLZA1yEZD"
 
 api.get("/profile", function(req, res) {
 
@@ -23,8 +28,8 @@ api.get("/profile", function(req, res) {
 
 
       }, function(error, response, body) {
-          console.log(body);
-          console.log("name" + body.name)
+          // console.log(body);
+          // console.log("name" + body.name)
           res.send(body);
 
       });

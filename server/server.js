@@ -48,6 +48,8 @@ app.use('/api/v1/facebook', require('./v1/routes/facebook.js'));
 app.use('/api/v1/instagram', require('./v1/routes/instagram.js'));
 app.use('/api/v1/pinterestBoards', require('./v1/routes/pinterestBoards.js'));
 app.use('/api/v1/pinterestPins', require('./v1/routes/pinterestPins.js'));
+app.use('/api/v1/ai', require('./v1/routes/ai.js'));
+
 
 // Start server
 var salesIntelServer = app.listen(port, function() {

@@ -1,0 +1,46 @@
+{
+  "description": {
+    "tags": [
+      "sitting",
+      "table",
+      "holding",
+      "little",
+      "cake",
+      "snow",
+      "donut",
+      "small",
+      "red",
+      "piece",
+      "bed",
+      "large",
+      "top",
+      "food",
+      "doughnut",
+      "mouth",
+      "young",
+      "girl",
+      "bear",
+      "blanket",
+      "covered",
+      "stuffed",
+      "white",
+      "wearing",
+      "birthday",
+      "eating",
+      "baby",
+      "dog"
+    ],
+    "captions": [
+      {
+        "text": "a little girl that is holding a donut",
+        "confidence": 0.37509044943009184
+      }
+    ]
+  },
+  "requestId": "b18b518a-e263-4341-8b02-4be09c638edc",
+  "metadata": {
+    "width": 720,
+    "height": 720,
+    "format": "Jpeg"
+  }
+}
