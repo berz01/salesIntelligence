@@ -2,6 +2,8 @@ var express = require('express');
 var http = require('http');
 var bodyParser = require('body-parser');
 var session = require('express-session');
+var instagram = require('instagram-node').instagram();
+
 var api = express.Router();
 
 api.use(bodyParser.json()); // support json encoded bodies
