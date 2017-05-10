@@ -45,7 +45,7 @@ api.use(bodyParser.urlencoded({
 
 
 api.get('/searchTwitterTweetsById', function(req, res) {
-    console.log('test');
+    console.log('inside twitter call');
     request({
         url: "https://api.twitter.com/1.1/search/tweets.json?q=berz01&result_type=recent&count=4",
         method: "GET",
