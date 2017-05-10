@@ -10,12 +10,13 @@ api.use(bodyParser.urlencoded({
   extended: true
 }));
 
-var accessToken = "EAASKn0f7tI0BALpi0kVEVQHGkQfiZBraZAHMscEqyYO9f7PbAqFAy3or535vYUqbdSlJfkrI0a8tC8ARROQU0bI86z3ZBaIsc1uymZC2Tq8JH4pJrZAfuTGew0Bu1GQSBLUBRKPF5tFFfb7J8ZAt45xNz7TwA2dzaOdGedO3oiuUR0ZBwmRafYonatdroTNiIMZD"
+var profileParamList = "fields=id,family,name,birthday,age_range,cover,favorite_teams,favorite_athletes,gender,hometown,education,interested_in,languages,email,location,political,relationship_status,religion,timezone,sports,website,work,about";
+var accessToken = "EAACEdEose0cBAO9moEZASZC0u9QbZArnpl0OxItdBQYJ08Jhg6jPZCsdsvepRhwPPNU2LTY3mJmDbV5mfAmkLjyeufHcHuABTfqjR8NcmVaZBOL0EW68kZARWQGV0QxwB0F6blQQLSZCCKZA3tBorYhVOgjwzZAgd2rrZAvczPEvcQjoUBZCRvMRmESE3hZC8Uwl7ngZD"
 
 api.get("/profile", function(req, res) {
 
       request({
-          url: "https://graph.facebook.com/me?" + "access_token=" + accessToken,
+          url: "https://graph.facebook.com/me?" + profileParamList + "&access_token=" + accessToken,
           method: "GET",
           json: true
 
@@ -27,25 +28,9 @@ api.get("/profile", function(req, res) {
           res.send(body);
 
       });
-        console.log("https://graph.facebook.com/me?" + accessToken);
+        console.log("https://graph.facebook.com/me?" + profileParamList + "&access_token=" + accessToken);
 });
 
-// api.get('/profile', function(req, res) {
-//
-//     request({
-//         url: "https://graph.facebook.com/me",
-//         method: "GET",
-//         json: true,
-      //     headers: {
-      //   'Accept': 'application/json',
-      //   'Accept-Charset': 'utf-8',
-      //   'User-Agent': 'my-reddit-client'
-      // }
-//
-//     }, function(error, response, body) {
-//         console.log(response.body);
-//     });
-//
-// });
+
 
 module.exports = api;
