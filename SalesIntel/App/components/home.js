@@ -29,10 +29,45 @@ export default class Home extends Component {
         toHome={() => this.props.navigator.replace({id:'home'})}
         />
       <ScrollView style={styles.base}>
+        <View style={styles.dateWrapper}>
+          <View style={styles.dateLabel}>
+            <Text style={styles.dateText}>
+              MAY
+            </Text>
+            <Text style={[styles.dateText, {fontWeight:'bold'}]}>
+              11th
+            </Text>
+          </View>
+          <View style={[styles.eventCard, styles.eventContent]}>
+              <View style={styles.eventMeta}>
+                <Text style={styles.metaText}>
+                  10:00am - 12:00pm
+                </Text>
+                <Text style={styles.metaText}>
+                  # work
+                </Text>
+              </View>
+              <View style={styles.eventTitles}>
+                <Text style={styles.titleMain}>
+                  Meet and Greet with Summer Interns
+                </Text>
+                <Text style={styles.titleSub}>
+                  Room 15076
+                </Text>
+              </View>
+          </View>
+        </View>
+        <View style={styles.dateWrapper}>
+          <View style={styles.dateLabel}>
+            <Text style={styles.dateText}>
+            </Text>
+            <Text style={[styles.dateText, {fontWeight:'bold'}]}>
+            </Text>
+          </View>
         <View style={[styles.eventCard, styles.eventContent]}>
             <View style={styles.eventMeta}>
               <Text style={styles.metaText}>
-                2:30pm - 3:15pm
+                1:00pm - 2:30pm
               </Text>
               <Text style={styles.metaText}>
                 # work
@@ -40,7 +75,7 @@ export default class Home extends Component {
             </View>
             <View style={styles.eventTitles}>
               <Text style={styles.titleMain}>
-                Candidate Presentation
+                FlashBuild Presentation
               </Text>
               <Text style={styles.titleSub}>
                 Room 310
@@ -96,11 +131,21 @@ export default class Home extends Component {
                 </View>
               </TouchableOpacity>
             </View>
+          </View>
         </View>
+        <View style={styles.dateWrapper}>
+          <View style={styles.dateLabel}>
+            <Text style={styles.dateText}>
+              MAY
+            </Text>
+            <Text style={[styles.dateText, {fontWeight:'bold'}]}>
+              20th
+            </Text>
+          </View>
         <View style={[styles.eventCard, styles.eventContent]}>
             <View style={styles.eventMeta}>
               <Text style={styles.metaText}>
-                2:30pm - 3:15pm
+                8:00pm - 9:00pm
               </Text>
               <Text style={styles.metaText}>
                 # work
@@ -108,14 +153,22 @@ export default class Home extends Component {
             </View>
             <View style={styles.eventTitles}>
               <Text style={styles.titleMain}>
-                Meet
+                Goodbye Feast with Chris McGovern
               </Text>
               <Text style={styles.titleSub}>
-                Room 310
+                Red Lobster
               </Text>
             </View>
-            <View style={styles.eventAttendeesView}>
-            </View>
+        </View>
+      </View>
+      <View style={styles.dateWrapper}>
+        <View style={styles.dateLabel}>
+          <Text style={styles.dateText}>
+            JUNE
+          </Text>
+          <Text style={[styles.dateText, {fontWeight:'bold'}]}>
+            14th
+          </Text>
         </View>
         <View style={[styles.eventCard, styles.eventContent]}>
             <View style={styles.eventMeta}>
@@ -137,6 +190,7 @@ export default class Home extends Component {
             <View style={styles.eventAttendeesView}>
             </View>
         </View>
+      </View>
       </ScrollView>
     </View>
     );
@@ -150,6 +204,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#F5FCFF',
+  },
+  dateWrapper:{
+    flexDirection:'row',
+  },
+  dateLabel:{
+    paddingLeft:15,
+    paddingVertical:15,
+    minWidth:65,
+  },
+  dateText:{
+    fontSize:16,
   },
   eventList: {
     flex: 1,
@@ -183,7 +248,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginRight: 10,
     marginVertical: 5,
-    marginLeft: width * 0.15,
+    paddingVertical:15,
     backgroundColor: '#303030',
     borderRadius: 3,
     borderColor: '#303030',
@@ -205,7 +270,7 @@ const styles = StyleSheet.create({
       flex:1,
       flexDirection:'row',
       justifyContent: 'flex-start',
-      paddingVertical:15,
+      paddingBottom:10,
       paddingLeft:18
   },
   eventTitles:{
@@ -216,7 +281,7 @@ const styles = StyleSheet.create({
   },
   eventAttendeesView:{
       flex:1,
-      padding:20
+      paddingHorizontal:20
   },
   eventAttendeesRow:{
       flex:1,
