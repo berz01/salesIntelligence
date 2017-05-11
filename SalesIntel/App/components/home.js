@@ -97,9 +97,9 @@ export default class Home extends Component {
                       </Text>
                     </View>
                     <View style={styles.attendeeInfoIndicatorView}>
-                      <Iconz name="md-person" color="#888" size={20} style={{
+                      <Iconz name="md-checkmark" color="#33cc33" size={20} style={{
                         margin: 10
-                      }}/>
+                      }}/> 
                     </View>
                   </View>
                 </TouchableOpacity>
