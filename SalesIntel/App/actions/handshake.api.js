@@ -97,48 +97,44 @@ var Api = {
     .then(e => e);
   },
   getInstagramFeed(){
-    return fetch('https://salesintel.herokuapp.com/api/v1/linkedin/maincall')
+    return fetch('https://salesintel.herokuapp.com/api/v1/instagram/maincall')
     .then(response => response.json())
-    .then(data => {
+    .then(response => {
         var instagramFeed = {};
         instagramFeed.feed = [];
-
-        instagramFeed.feed.push({
-          info: "Example Test for instagram",
-          img: null
-        });
-
-
-        instagramFeed.feed.push({
-          info: "Second Example Test for instagram",
-          img: null
-        });
-
+ 
+        for(var i=0; i < 3; i++){
+          instagramFeed.feed.push({
+            info: response.data[i].caption.text,
+            img: response.data[i].images.standard_resolution.url
+          });
+        }
 
         return instagramFeed;
     })
-    .then(e => e);
+    .then(e => {
+      console.log("INSTA ERROR",e);
+    })
   },
   getTwitterFeed(){
-    return fetch('https://salesintel.herokuapp.com/api/v1/linkedin/maincall')
+    return fetch('https://salesintel.herokuapp.com/api/v1/twitter/searchTwitterTweetsById')
     .then(response => response.json())
     .then(data => {
         var twitterFeed = {};
         twitterFeed.feed = [];
 
-        twitterFeed.feed.push({
-          info: "Example Test for Twitter",
-          img: null
-        });
-
-        twitterFeed.feed.push({
-          info: "Second Example Test for Twitter",
-          img: null
-        });
+        for(var i=0; i < data.statuses.length; i++){
+          twitterFeed.feed.push({
+            info: data.statuses[i].text,
+            img: null
+          });
+        }
 
         return twitterFeed;
     })
-    .then(e => e);
+    .then(e => {
+      console.log(e);
+    })
   }
 };
 
