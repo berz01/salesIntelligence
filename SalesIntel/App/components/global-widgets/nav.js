@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
       width: 35,
       height: 35,
       marginLeft:10,
-      marginRight:2
+      marginRight:5
   },
   actionFormatting: {
       margin: 10
