@@ -74,6 +74,9 @@ export default class Profile extends Component {
     let profileUri = this.state.profileData.pictureUri;
     return (
       <View style={styles.container}>
+        <Nav
+          toHome={() => this.props.navigator.replace({id:'home'})}
+          />
         <Image style={custom.bgImage} source={require('../images/background.jpg')}>
           <ScrollView style={custom.scrollViewStyle}>
             <View style={custom.headerCardStyle}>
