@@ -120,12 +120,79 @@ export default class Profile extends Component {
                   />
                 </View>
             </View>
+            <View style={styling.feedCard}>
+              <View style={styling.feedHeader}>
+                <IconA name="facebook" color="#ffffff" size={25}/>
+              </View>
+              <View style={styling.feedContent}>
+                <View style={styling.feedRow}>
+                  <IconA name="angle-double-right" color="#ffffff" size={20}/>
+                  <Text style={styling.feedText}>
+                    Testing Testing Testing Testing
+                  </Text>
+                </View>
+                <View style={styling.feedRow}>
+                  <IconA name="angle-double-right" color="#ffffff" size={20}/>
+                  <Text style={styling.feedText}>
+                    Testing Testing Testing Testing
+                  </Text>
+                </View>
+              </View>
+            </View>
           </ScrollView>
         </Image>
       </View>
     )
   }
 }
+
+const styling = StyleSheet.create({
+  feedCard: {
+    flex: 1,
+    marginVertical: height * 0.05,
+    marginHorizontal: width * 0.05,
+    padding: 25,
+    backgroundColor: '#303030',
+    borderRadius: 1,
+    borderColor: '#303030',
+    borderWidth: 1,
+    shadowColor: 'rgba(0, 0, 0, 0.12)',
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    shadowOffset: {
+      height: 1,
+      width: 2
+    }
+  },
+  feedContent:{
+      flex:1,
+      flexDirection:'column',
+      justifyContent: 'flex-end',
+  },
+  feedHeader:{
+      flex:1,
+      flexDirection:'column',
+      justifyContent: 'flex-end',
+      borderBottomColor:  'rgba(255, 255, 255, 0.75)',
+      borderBottomWidth: 2,
+      paddingBottom:10
+  },
+  feedRow: {
+      flex:1,
+      flexDirection:'row',
+      alignItems: 'center',
+      justifyContent: 'flex-start',
+      paddingVertical:10,
+      borderBottomColor:  'rgba(255, 255, 255, 0.5)',
+      borderBottomWidth: StyleSheet.hairlineWidth,
+  },
+  feedText: {
+      color: '#ffffff',
+      minHeight: 20,
+      paddingLeft:10,
+      fontSize: 14
+  },
+});
 
 const custom = StyleSheet.create({
   imageCircle: {
@@ -163,7 +230,7 @@ const custom = StyleSheet.create({
     minHeight: 50,
     justifyContent: 'flex-end',
     alignItems: 'center',
-    fontSize: 16
+    fontSize: 16,
   },
   heroText:{
     color: '#ffffff',
@@ -185,6 +252,12 @@ const custom = StyleSheet.create({
   scrollViewStyle: {
     flex: 1
   },
+  profileInfo:{
+      flex:1,
+      flexDirection:'column',
+      justifyContent: 'flex-end',
+      paddingLeft:10
+  },
   profileContentStyle:{
       flex:1,
       padding:20
@@ -202,12 +275,6 @@ const custom = StyleSheet.create({
       justifyContent: 'space-between',
       maxWidth: width * 0.075,
       marginRight: 5
-  },
-  profileInfo:{
-      flex:1,
-      flexDirection:'column',
-      justifyContent: 'flex-end',
-      paddingLeft:10
   },
   profileCardStyle: {
     flex: 1,

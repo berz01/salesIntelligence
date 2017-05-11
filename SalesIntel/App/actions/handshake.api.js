@@ -40,16 +40,8 @@ var Api = {
           network: 'linkedin',
           info: "Started at Some Firm in June 06, 2016",
           img: null
-        }, {
-          network: 'instagram',
-          info: "",
-          img: null
-        }, {
-          network: 'twitter',
-          info: "i lost my dad in walmart",
-          img: null
         }]
-        
+
         return profile;
     })
     .catch(e => {
