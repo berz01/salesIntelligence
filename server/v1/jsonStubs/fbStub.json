@@ -1,52 +1,82 @@
 {
   "id": "10152437587011264",
+  "photos": {
+    "data": [
+      {
+        "link": "https://www.facebook.com/photo.php?fbid=3107329038585&set=p.3107329038585&type=3",
+        "id": "3107329038585",
+        "created_time": "2017-01-15T19:11:48+0000"
+      },
+      {
+        "link": "https://www.facebook.com/photo.php?fbid=10154904677026264&set=a.51227791263.76633.523611263&type=3",
+        "id": "10154904677026264",
+        "created_time": "2016-11-21T17:40:03+0000"
+      },
+      {
+        "link": "https://www.facebook.com/photo.php?fbid=10154904677016264&set=a.51227791263.76633.523611263&type=3",
+        "id": "10154904677016264",
+        "created_time": "2016-11-21T17:40:03+0000"
+      }
+    ],
+    "paging": {
+      "cursors": {
+        "before": "TXpFd056TXlPVEF6T0RVNE5Ub3hORGcwTlRBM05qYzFPak01TkRBNE9UWTBNRFkwTnpnek5nPT0ZD",
+        "after": "TVRBeE5UUTVNRFEyTnpjd01UWXlOalE2TVRRM09UYzFNREF3Tmpvek9UUXdPRGsyTkRBMk5EYzRNelk9"
+      },
+      "next": "https://graph.facebook.com/v2.3/10152437587011264/photos?access_token=EAACEdEose0cBAK5kCMa1aVHCu179OEmYckAbZCkBVyzvNpzVLQtpDZCoOqZAio6lUZB1fC9jOW7gsJjwYbtZA2rBCiDnYYT5RH2JttaI0bvh27ubwUSgdUrjn58BZBIz7RaqCN2eTlWeDIBRuGh1ivblpSEtBjhd5ocnKnm3b38IJTrC8L9fHlDvPsJmCtCQEZD&fields=link%2Cname%2Cid%2Ccomments.limit%280%29&limit=4&after=TVRBeE5UUTVNRFEyTnpjd01UWXlOalE2TVRRM09UYzFNREF3Tmpvek9UUXdPRGsyTkRBMk5EYzRNelk9"
+    }
+  },
   "name": "Barrett Davis",
   "birthday": "06/18/1989",
-  "age_range": {
-    "min": 21
-  },
   "cover": {
     "id": "10155041160831264",
     "offset_y": 17,
     "source": "https://scontent.xx.fbcdn.net/v/t1.0-9/p720x720/15698074_10155041160831264_5700517682694029115_n.jpg?oh=10e34b50e9e6860557e681be164f2004&oe=59B97301"
   },
-  "favorite_teams": [{
-    "id": "50806422841",
-    "name": "Atlanta Falcons"
-  }, {
-    "id": "301929676558852",
-    "name": "Atlanta Falcons Cheerleaders"
-  }],
+  "favorite_teams": [
+    {
+      "id": "50806422841",
+      "name": "Atlanta Falcons"
+    },
+    {
+      "id": "301929676558852",
+      "name": "Atlanta Falcons Cheerleaders"
+    }
+  ],
   "gender": "male",
   "hometown": {
     "id": "111822758834362",
     "name": "Marietta, Georgia"
   },
-  "education": [{
-    "school": {
-      "id": "106043599426916",
-      "name": "George Walton Comprehensive High School"
+  "education": [
+    {
+      "school": {
+        "id": "106043599426916",
+        "name": "George Walton Comprehensive High School"
+      },
+      "type": "High School",
+      "year": {
+        "id": "140617569303679",
+        "name": "2007"
+      },
+      "id": "10150097948066264"
     },
-    "type": "High School",
-    "year": {
-      "id": "140617569303679",
-      "name": "2007"
-    },
-    "id": "10150097948066264"
-  }, {
-    "school": {
-      "id": "21657666681",
-      "name": "University of Georgia"
-    },
-    "type": "College",
-    "year": {
-      "id": "144044875610606",
-      "name": "2011"
-    },
-    "id": "10150097948321264"
-  }],
-  "interested_in": ["female"],
-  "email": "barrettdavis@hotmail.com",
+    {
+      "school": {
+        "id": "21657666681",
+        "name": "University of Georgia"
+      },
+      "type": "College",
+      "year": {
+        "id": "144044875610606",
+        "name": "2011"
+      },
+      "id": "10150097948321264"
+    }
+  ],
+  "interested_in": [
+    "female"
+  ],
   "location": {
     "id": "107991659233606",
     "name": "Atlanta, Georgia"
@@ -55,16 +85,18 @@
   "relationship_status": "In a relationship",
   "religion": "Pi Kappa Alpha",
   "timezone": -4,
-  "work": [{
-    "employer": {
-      "id": "148494345222255",
-      "name": "NterNow"
-    },
-    "position": {
-      "id": "268206169916220",
-      "name": "COO"
-    },
-    "start_date": "0000-00",
-    "id": "10151690576426264"
-  }]
+  "work": [
+    {
+      "employer": {
+        "id": "148494345222255",
+        "name": "NterNow"
+      },
+      "position": {
+        "id": "268206169916220",
+        "name": "COO"
+      },
+      "start_date": "0000-00",
+      "id": "10151690576426264"
+    }
+  ]
 }
