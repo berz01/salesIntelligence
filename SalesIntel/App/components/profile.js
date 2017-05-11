@@ -267,7 +267,7 @@ export default class Profile extends Component {
 
     if (this.state.isLoading) {
       profileView = (
-        <View style={styles.spinnerContainer}>
+        <View style={styling.spinnerContainer}>
           <MKSpinner style={styling.spinner}/>
         </View>
       );
@@ -289,10 +289,10 @@ export default class Profile extends Component {
 
 const styling = StyleSheet.create({
   spinnerContainer: {
-    flex:1,
-    flexDirection:'column',
+    flex: 1,
+    flexDirection: 'column',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   spinner: {
     width: 50,
