@@ -42,13 +42,13 @@ app.get('/api/v1/*', function(req, res, next) {
     next();
 });
 
-app.use('/api/v1/linkedIn', require('./v1/routes/linkedin.js'));
-app.use('/api/v1/twitter', require('./v1/routes/twitter.js'));
-app.use('/api/v1/facebook', require('./v1/routes/facebook.js'));
-app.use('/api/v1/instagram', require('./v1/routes/instagram.js'));
-app.use('/api/v1/pinterestBoards', require('./v1/routes/pinterestBoards.js'));
-app.use('/api/v1/pinterestPins', require('./v1/routes/pinterestPins.js'));
-app.use('/api/v1/ai', require('./v1/routes/ai.js'));
+app.use('/api/v1/linkedIn', require('./server/v1/routes/linkedin.js'));
+app.use('/api/v1/twitter', require('./server/v1/routes/twitter.js'));
+app.use('/api/v1/facebook', require('./server/v1/routes/facebook.js'));
+app.use('/api/v1/instagram', require('./server/v1/routes/instagram.js'));
+app.use('/api/v1/pinterestBoards', require('./server/v1/routes/pinterestBoards.js'));
+app.use('/api/v1/pinterestPins', require('./server/v1/routes/pinterestPins.js'));
+app.use('/api/v1/ai', require('./server/v1/routes/ai.js'));
 
 
 // Start server
