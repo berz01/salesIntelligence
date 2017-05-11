@@ -16,7 +16,7 @@ api.use(bodyParser.urlencoded({
 
 
 var profileParamList = "fields=id,photos.limit(4){link,name,id,comments.limit(0)},family,name,birthday,cover,favorite_teams,favorite_athletes,gender,hometown,education,interested_in,languages,location,political,relationship_status,religion,timezone,sports,website,work,about";
-var accessToken = "EAACEdEose0cBAK5kCMa1aVHCu179OEmYckAbZCkBVyzvNpzVLQtpDZCoOqZAio6lUZB1fC9jOW7gsJjwYbtZA2rBCiDnYYT5RH2JttaI0bvh27ubwUSgdUrjn58BZBIz7RaqCN2eTlWeDIBRuGh1ivblpSEtBjhd5ocnKnm3b38IJTrC8L9fHlDvPsJmCtCQEZD"
+var accessToken = "EAACEdEose0cBADcQb5uTgZAdEjN89sCSrZCh5CYUzZB3YoP6ZAYHhV2h3xybvukXJPHWq8oldoZAC4hfBrkZAcADMPW31BcBJE1NoftZBbYn2S6Jz9w8AZATeGxEvOWFl42jDPoku8QToc0FojgU5L47Xh0i9ZALZAlrDzIBduZB1ZBCjgbUU7ACZBliGFpS6Sh5n0k4ZD"
 
 api.get("/profile", function(req, res) {
 
