@@ -59,8 +59,9 @@ export default class Profile extends Component {
 
   componentDidMount(){
     var _this = this;
-    Api.getProfileStub()
+    Api.getLinkedIn()
     .then(data => {
+        console.log(data);
         _this.setState({
           socialData: this.state.socialData.cloneWithRows(data.feed),
           profileData: data.profileData,
