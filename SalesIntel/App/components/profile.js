@@ -67,12 +67,12 @@ export default class Profile extends Component {
 
   renderImage(image){
     if(image != null){
-      return <Image style={custom.imageCircle} source={{uri: image}}/>
+      return <Image style={styling.feedImage} source={{uri: image}}/>
     }
   }
   renderText(text){
     if(text != null){
-      return <Text style={styling.feedText}> {text}</Text>
+      return <Text style={styling.feedText}>{text}</Text>
     }
   }
 
@@ -80,7 +80,6 @@ export default class Profile extends Component {
     var _this = this;
     Api.getProfile()
     .then(data => {
-        console.log(data);
         _this.setState({
           socialData: this.state.socialData.cloneWithRows(data.feed),
           profileData: data.profileData,
@@ -88,6 +87,13 @@ export default class Profile extends Component {
         });
     })
     .catch(e => e);
+
+    Api.getFacebookFeed()
+    .then(data => {
+        _this.setState({
+          fbFeed: this.state.fbFeed.cloneWithRows(data.feed)
+        })
+    })
 
     Api.getLinkedInFeed()
     .then(data => {
@@ -172,11 +178,13 @@ export default class Profile extends Component {
                   renderRow={(rowData) =>
                     <View style={styling.feedRow}>
                       <IconA name="angle-double-right" color="#ffffff" size={20}/>
-                      {this.renderImage(rowData.img)}
-                      {this.renderText(rowData.info)}
+                      <View style={styling.feedItems}>
+                        {this.renderImage(rowData.img)}
+                        {this.renderText(rowData.info)}
+                      </View>
                     </View>
                   }
-                /> 
+                />
               </View>
             </View>
             <View style={styling.feedCard}>
@@ -190,9 +198,12 @@ export default class Profile extends Component {
                   renderRow={(rowData) =>
                     <View style={styling.feedRow}>
                       <IconA name="angle-double-right" color="#ffffff" size={20}/>
-                      {this.renderImage(rowData.img)}
-                      {this.renderText(rowData.info)}
-                    </View>
+
+                      <View style={styling.feedItems}>
+                        {this.renderImage(rowData.img)}
+                        {this.renderText(rowData.info)}
+                      </View>
+                  </View>
                   }
                 />
               </View>
@@ -207,9 +218,11 @@ export default class Profile extends Component {
                   dataSource={this.state.instagramFeed}
                   renderRow={(rowData) =>
                     <View style={styling.feedRow}>
-                      <IconA name="angle-double-right" color="#ffffff" size={20}/>
-                      {this.renderImage(rowData.img)}
-                      {this.renderText(rowData.info)}
+                      <IconA name="angle-double-right" color="#ffffff" size={20}/> 
+                      <View style={styling.feedItems}>
+                        {this.renderImage(rowData.img)}
+                        {this.renderText(rowData.info)}
+                      </View>
                     </View>
                   }
                 />
@@ -225,9 +238,11 @@ export default class Profile extends Component {
                   dataSource={this.state.twitterFeed}
                   renderRow={(rowData) =>
                     <View style={styling.feedRow}>
-                      <IconA name="angle-double-right" color="#ffffff" size={20}/>
-                      {this.renderImage(rowData.img)}
-                      {this.renderText(rowData.info)}
+                    <IconA name="angle-double-right" color="#ffffff" size={20}/>
+                      <View style={styling.feedItems}>
+                        {this.renderImage(rowData.img)}
+                        {this.renderText(rowData.info)}
+                      </View>
                     </View>
                   }
                 />
@@ -263,6 +278,10 @@ const styling = StyleSheet.create({
       flexDirection:'column',
       justifyContent: 'flex-end',
   },
+  feedItems:{
+      flex:1,
+      paddingLeft:5
+  },
   feedHeader:{
       flex:1,
       flexDirection:'column',
@@ -274,17 +293,22 @@ const styling = StyleSheet.create({
   feedRow: {
       flex:1,
       flexDirection:'row',
-      alignItems: 'center',
+      alignItems: 'flex-start',
       justifyContent: 'flex-start',
       paddingVertical:10,
+      paddingRight:10,
       borderBottomColor:  'rgba(255, 255, 255, 0.5)',
       borderBottomWidth: StyleSheet.hairlineWidth,
   },
   feedText: {
       color: '#ffffff',
       minHeight: 20,
-      paddingLeft:10,
       fontSize: 14
+  },
+  feedImage: {
+    height:300,
+    width:300,
+    borderRadius: 2
   },
 });
 
