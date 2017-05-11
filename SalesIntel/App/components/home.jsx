@@ -46,7 +46,8 @@ export default class Home extends Component {
                   10:00am - 12:00pm
                 </Text>
                 <Text style={styles.metaText}>
-                  <IconA name="dot-circle-o" color="#ffffff" size={10} color={'#00bfff'}/> work
+                  <IconA name="dot-circle-o" color="#ffffff" size={10} color={'#00bfff'}/>
+                  work
                 </Text>
               </View>
               <View style={styles.eventTitles}>
@@ -74,7 +75,7 @@ export default class Home extends Component {
                   1:00pm - 2:30pm
                 </Text>
                 <Text style={styles.metaText}>
-                  <IconA name="dot-circle-o" color="#ffffff" size={10} color={'#00bfff'}/> work
+                  # work
                 </Text>
               </View>
               <View style={styles.eventTitles}>
@@ -95,7 +96,7 @@ export default class Home extends Component {
                       <Text style={styles.nameText}>
                         Barrett Davis
                       </Text>
-                    </View>
+                    </Vie\w>
                     <View style={styles.attendeeInfoIndicatorView}>
                       <Iconz name="md-person" color="#888" size={20} style={{
                         margin: 10
@@ -159,7 +160,7 @@ export default class Home extends Component {
                   8:00pm - 9:00pm
                 </Text>
                 <Text style={styles.metaText}>
-                  <IconA name="dot-circle-o" color="#ffffff" size={10} color={'#8fbc8f'}/> personal
+                  # work
                 </Text>
               </View>
               <View style={styles.eventTitles}>
@@ -191,7 +192,7 @@ export default class Home extends Component {
                   2:30pm - 3:15pm
                 </Text>
                 <Text style={styles.metaText}>
-                  <IconA name="dot-circle-o" color="#ffffff" size={10} color={'#00bfff'}/> work
+                  # work
                 </Text>
               </View>
               <View style={styles.eventTitles}>
@@ -234,6 +235,7 @@ const styles = StyleSheet.create({
     flex: 1
   },
   metaText: {
+    flex: 1,
     color: '#ffffff',
     fontSize: 14
   },
@@ -284,7 +286,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingBottom: 10,
-    paddingHorizontal: 18
+    paddingLeft: 18
   },
   eventTitles: {
     flex: 1,
