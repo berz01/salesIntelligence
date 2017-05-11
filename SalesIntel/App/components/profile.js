@@ -37,11 +37,19 @@ export default class Profile extends Component {
   constructor(props) {
     super(props);
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    const fbListDs = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    const linkedinListFeed = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    const instagramListFeed = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    const twitterListFeed = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
     this.state = {
       socialData: ds.cloneWithRows([]),
+      fbFeed: fbListDs.cloneWithRows([]),
+      linkedinFeed: linkedinListFeed.cloneWithRows([]),
+      instagramFeed: instagramListFeed.cloneWithRows([]),
+      twitterFeed: twitterListFeed.cloneWithRows([]),
       profileData: {},
-      profileHeadline: {}
+      profileHeadline: {},
     };
   }
 
@@ -57,9 +65,20 @@ export default class Profile extends Component {
     }
   }
 
+  renderImage(image){
+    if(image != null){
+      return <Image style={custom.imageCircle} source={{uri: image}}/>
+    }
+  }
+  renderText(text){
+    if(text != null){
+      return <Text style={styling.feedText}> {text}</Text>
+    }
+  }
+
   componentDidMount(){
     var _this = this;
-    Api.getLinkedIn()
+    Api.getProfile()
     .then(data => {
         console.log(data);
         _this.setState({
@@ -68,7 +87,29 @@ export default class Profile extends Component {
           profileHeadline: data.profileHeadline
         });
     })
-    .catch(e => e)
+    .catch(e => e);
+
+    Api.getLinkedInFeed()
+    .then(data => {
+        _this.setState({
+          linkedinFeed: this.state.linkedinFeed.cloneWithRows(data.feed)
+        })
+    })
+
+    Api.getInstagramFeed()
+    .then(data => {
+        _this.setState({
+          instagramFeed: this.state.instagramFeed.cloneWithRows(data.feed)
+        })
+    })
+
+    Api.getTwitterFeed()
+    .then(data => {
+        _this.setState({
+          twitterFeed: this.state.twitterFeed.cloneWithRows(data.feed)
+        })
+    })
+
   }
 
   render() {
@@ -125,18 +166,71 @@ export default class Profile extends Component {
                 <IconA name="facebook" color="#ffffff" size={25}/>
               </View>
               <View style={styling.feedContent}>
-                <View style={styling.feedRow}>
-                  <IconA name="angle-double-right" color="#ffffff" size={20}/>
-                  <Text style={styling.feedText}>
-                    Testing Testing Testing Testing
-                  </Text>
-                </View>
-                <View style={styling.feedRow}>
-                  <IconA name="angle-double-right" color="#ffffff" size={20}/>
-                  <Text style={styling.feedText}>
-                    Testing Testing Testing Testing
-                  </Text>
-                </View>
+                <ListView
+                  enableEmptySections={true}
+                  dataSource={this.state.fbFeed}
+                  renderRow={(rowData) =>
+                    <View style={styling.feedRow}>
+                      <IconA name="angle-double-right" color="#ffffff" size={20}/>
+                      {this.renderImage(rowData.img)}
+                      {this.renderText(rowData.info)}
+                    </View>
+                  }
+                /> 
+              </View>
+            </View>
+            <View style={styling.feedCard}>
+              <View style={styling.feedHeader}>
+                <IconA name="linkedin-square" color="#ffffff" size={25}/>
+              </View>
+              <View style={styling.feedContent}>
+                <ListView
+                  enableEmptySections={true}
+                  dataSource={this.state.linkedinFeed}
+                  renderRow={(rowData) =>
+                    <View style={styling.feedRow}>
+                      <IconA name="angle-double-right" color="#ffffff" size={20}/>
+                      {this.renderImage(rowData.img)}
+                      {this.renderText(rowData.info)}
+                    </View>
+                  }
+                />
+              </View>
+            </View>
+            <View style={styling.feedCard}>
+              <View style={styling.feedHeader}>
+                <IconA name="instagram" color="#ffffff" size={25}/>
+              </View>
+              <View style={styling.feedContent}>
+                <ListView
+                  enableEmptySections={true}
+                  dataSource={this.state.instagramFeed}
+                  renderRow={(rowData) =>
+                    <View style={styling.feedRow}>
+                      <IconA name="angle-double-right" color="#ffffff" size={20}/>
+                      {this.renderImage(rowData.img)}
+                      {this.renderText(rowData.info)}
+                    </View>
+                  }
+                />
+              </View>
+            </View>
+            <View style={styling.feedCard}>
+              <View style={styling.feedHeader}>
+                <IconA name="twitter" color="#ffffff" size={25}/>
+              </View>
+              <View style={styling.feedContent}>
+                <ListView
+                  enableEmptySections={true}
+                  dataSource={this.state.twitterFeed}
+                  renderRow={(rowData) =>
+                    <View style={styling.feedRow}>
+                      <IconA name="angle-double-right" color="#ffffff" size={20}/>
+                      {this.renderImage(rowData.img)}
+                      {this.renderText(rowData.info)}
+                    </View>
+                  }
+                />
               </View>
             </View>
           </ScrollView>
@@ -149,7 +243,7 @@ export default class Profile extends Component {
 const styling = StyleSheet.create({
   feedCard: {
     flex: 1,
-    marginVertical: height * 0.05,
+    marginVertical: height * 0.015,
     marginHorizontal: width * 0.05,
     padding: 25,
     backgroundColor: '#303030',
@@ -279,6 +373,7 @@ const custom = StyleSheet.create({
   profileCardStyle: {
     flex: 1,
     marginTop: height * 0.4,
+    marginBottom: height * 0.015,
     marginHorizontal: width * 0.05,
     backgroundColor: '#303030',
     borderRadius: 1,
