@@ -113,7 +113,7 @@ var Api = {
         return linkedinFeed;
     })
     .catch(e => e);
-  }, 
+  },
   getInstagramFeed(){
     return fetch('https://salesintel.herokuapp.com/api/v1/instagram/maincall')
     .then(response => response.json())
@@ -140,6 +140,21 @@ var Api = {
     .then(data => {
         var twitterFeed = {};
         twitterFeed.feed = [];
+
+        twitterFeed.feed.push({
+          info: "SF Flash Build presentation later today. Wish me luck!",
+          img: null
+        });
+
+        twitterFeed.feed.push({
+          info: "Been working too hard this week; getting exhausted. #noSleep",
+          img: null
+        });
+
+        twitterFeed.feed.push({
+          info: "Shout out to my boy @adamBall for graduating from Georgia Tech today!",
+          img: null
+        });
 
         // for(var i=0; i < data.statuses.length; i++){
         //   twitterFeed.feed.push({
