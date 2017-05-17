@@ -24,8 +24,9 @@
     "body-parser": "1.15.2",
     "request-debug": "0.2.0",
     "request-promise": "^4.2.1",
-    "simple-oauth2": "^1.2.0"
-
+    "simple-oauth2": "^1.2.0",
+    "passport": "^0.2.2",
+    "passport-facebook": "^2.0.0"
   },
   "engines": {
     "node": "6.7.0",
