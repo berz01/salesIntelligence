@@ -19,7 +19,7 @@ var Api = {
 
       profile.profileHeadline = {
         network: 'twitter',
-        info: "Leading the edge on Product Development",
+        info: "Leading the edge on Product Development - @Berz01",
         img: null
       }
 

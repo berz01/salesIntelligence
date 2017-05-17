@@ -19,7 +19,7 @@ export default class Nav extends Component {
               />
           </TouchableOpacity>
           <TouchableOpacity onPress={this.props.toHome}>
-              <Image source ={require('../../images/logo.png')} resizeMode="contain" style={{
+              <Image source ={require('../../images/logo_2.png')} resizeMode="contain" style={{
                 width: 150,
                 height: 35
               }}/>
@@ -124,7 +124,8 @@ const styles = StyleSheet.create({
   iconFormatting:{
       width: 35,
       height: 35,
-      margin: 10
+      marginLeft:10,
+      marginRight:5
   },
   actionFormatting: {
       margin: 10

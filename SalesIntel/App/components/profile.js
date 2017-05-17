@@ -19,6 +19,7 @@ import {
   MKButton,
   MKColor,
   MKIconToggle,
+  MKSpinner,
   getTheme,
   setTheme
 } from 'react-native-material-kit';
@@ -32,7 +33,6 @@ var {height, width} = Dimensions.get('window');
 const theme = getTheme();
 const styles = require('../styles');
 
-
 export default class Profile extends Component {
   constructor(props) {
     super(props);
@@ -43,6 +43,7 @@ export default class Profile extends Component {
     const twitterListFeed = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
     this.state = {
+      isLoading: true,
       socialData: ds.cloneWithRows([]),
       fbFeed: fbListDs.cloneWithRows([]),
       linkedinFeed: linkedinListFeed.cloneWithRows([]),
@@ -78,184 +79,225 @@ export default class Profile extends Component {
 
   componentDidMount(){
     var _this = this;
-    Api.getProfile()
-    .then(data => {
+
+    Promise.all([Api.getProfile(),
+      Api.getFacebookFeed(),
+      Api.getLinkedInFeed(),
+      Api.getInstagramFeed(),
+      Api.getTwitterFeed()])
+      .then(responses => {
+        console.log(responses);
         _this.setState({
-          socialData: this.state.socialData.cloneWithRows(data.feed),
-          profileData: data.profileData,
-          profileHeadline: data.profileHeadline
+          isLoading: false,
+          socialData: this.state.socialData.cloneWithRows(responses[0].feed),
+          profileData: responses[0].profileData,
+          profileHeadline: responses[0].profileHeadline,
+          fbFeed: this.state.fbFeed.cloneWithRows( responses[1].feed),
+          linkedinFeed: this.state.linkedinFeed.cloneWithRows( responses[2].feed),
+          instagramFeed: this.state.instagramFeed.cloneWithRows( responses[3].feed),
+          twitterFeed: this.state.twitterFeed.cloneWithRows( responses[4].feed),
         });
-    })
-    .catch(e => e);
+      })
+      .catch(e => {
+        console.log("EXCEPTION FOR ALL PROMISES", e);
+      });
 
-    Api.getFacebookFeed()
-    .then(data => {
-        _this.setState({
-          fbFeed: this.state.fbFeed.cloneWithRows(data.feed)
-        })
-    })
+    // Api.getFacebookFeed()
+    // .then(data => {
+    //     _this.setState({
+    //       fbFeed: this.state.fbFeed.cloneWithRows(data.feed)
+    //     })
+    // })
+    //
+    // Api.getLinkedInFeed()
+    // .then(data => {
+    //     _this.setState({
+    //       linkedinFeed: this.state.linkedinFeed.cloneWithRows(data.feed)
+    //     })
+    // })
+    //
+    // Api.getInstagramFeed()
+    // .then(data => {
+    //     _this.setState({
+    //       instagramFeed: this.state.instagramFeed.cloneWithRows(data.feed)
+    //     })
+    // })
+    //
+    // Api.getTwitterFeed()
+    // .then(data => {
+    //     _this.setState({
+    //       twitterFeed: this.state.twitterFeed.cloneWithRows(data.feed)
+    //     })
+    // })
+  }
 
-    Api.getLinkedInFeed()
-    .then(data => {
-        _this.setState({
-          linkedinFeed: this.state.linkedinFeed.cloneWithRows(data.feed)
-        })
-    })
+  renderProfile(){
+      let profileUri = this.state.profileData.pictureUri;
+      return (
+      <Image style={custom.bgImage} source={require('../images/background.jpg')}>
+        <ScrollView style={custom.scrollViewStyle}>
+          <View style={custom.headerCardStyle}>
+              <Text style={[theme.cardContentStyle, custom.heroText]}>
+                {this.state.profileHeadline.info}
+              </Text>
+          </View>
+          <View style={custom.profileCardStyle}>
+              <View style={custom.profileHeaderContentStyle}>
+                <Image style={custom.imageCircle} source={{uri: profileUri}}/>
+                <View style={custom.profileInfo}>
+                  <Text style={custom.name}>
+                    {this.state.profileData.name}
+                  </Text>
+                  <Text style={custom.occupation}>
+                    {this.state.profileData.occupation}
+                  </Text>
+                </View>
+                <View style={custom.profileNetworks}>
+                  <IconA name="facebook-official" color="#ffffff" size={25}/>
+                  <IconA name="linkedin-square" color="#ffffff" size={25} />
+                  <IconA name="instagram" color="#ffffff" size={25} style={{
+                      marginBottom: 10
+                    }}/>
+                </View>
+              </View>
+              <View style={custom.profileContentStyle}>
+                <Text style={custom.insights}>
+                  Insights
+                </Text>
+                <ListView
+                  enableEmptySections={true}
+                  dataSource={this.state.socialData}
+                  renderRow={(rowData) =>
+                    <View style={{flex:1,flexDirection:'row'}}>
+                    {this.renderSocialNetworkIcon(rowData.network)}
+                    <Text style={custom.contentText}> {rowData.info} </Text>
+                    </View>
+                  }
+                />
+              </View>
+          </View>
+          <View style={styling.feedCard}>
+            <View style={styling.feedHeader}>
+              <IconA name="facebook" color="#ffffff" size={25}/>
+            </View>
+            <View style={styling.feedContent}>
+              <ListView
+                enableEmptySections={true}
+                dataSource={this.state.fbFeed}
+                renderRow={(rowData) =>
+                  <View style={styling.feedRow}>
+                    <IconA name="angle-double-right" color="#ffffff" size={20}/>
+                    <View style={styling.feedItems}>
+                      {this.renderImage(rowData.img)}
+                      {this.renderText(rowData.info)}
+                    </View>
+                  </View>
+                }
+              />
+            </View>
+          </View>
+          <View style={styling.feedCard}>
+            <View style={styling.feedHeader}>
+              <IconA name="linkedin-square" color="#ffffff" size={25}/>
+            </View>
+            <View style={styling.feedContent}>
+              <ListView
+                enableEmptySections={true}
+                dataSource={this.state.linkedinFeed}
+                renderRow={(rowData) =>
+                  <View style={styling.feedRow}>
+                    <IconA name="angle-double-right" color="#ffffff" size={20}/>
 
-    Api.getInstagramFeed()
-    .then(data => {
-        _this.setState({
-          instagramFeed: this.state.instagramFeed.cloneWithRows(data.feed)
-        })
-    })
-
-    Api.getTwitterFeed()
-    .then(data => {
-        _this.setState({
-          twitterFeed: this.state.twitterFeed.cloneWithRows(data.feed)
-        })
-    })
-
+                    <View style={styling.feedItems}>
+                      {this.renderImage(rowData.img)}
+                      {this.renderText(rowData.info)}
+                    </View>
+                </View>
+                }
+              />
+            </View>
+          </View>
+          <View style={styling.feedCard}>
+            <View style={styling.feedHeader}>
+              <IconA name="instagram" color="#ffffff" size={25}/>
+            </View>
+            <View style={styling.feedContent}>
+              <ListView
+                enableEmptySections={true}
+                dataSource={this.state.instagramFeed}
+                renderRow={(rowData) =>
+                  <View style={styling.feedRow}>
+                    <IconA name="angle-double-right" color="#ffffff" size={20}/>
+                    <View style={styling.feedItems}>
+                      {this.renderImage(rowData.img)}
+                      {this.renderText(rowData.info)}
+                    </View>
+                  </View>
+                }
+              />
+            </View>
+          </View>
+          <View style={styling.feedCard}>
+            <View style={styling.feedHeader}>
+              <IconA name="twitter" color="#ffffff" size={25}/>
+            </View>
+            <View style={styling.feedContent}>
+              <ListView
+                enableEmptySections={true}
+                dataSource={this.state.twitterFeed}
+                renderRow={(rowData) =>
+                  <View style={styling.feedRow}>
+                  <IconA name="angle-double-right" color="#ffffff" size={20}/>
+                    <View style={styling.feedItems}>
+                      {this.renderImage(rowData.img)}
+                      {this.renderText(rowData.info)}
+                    </View>
+                  </View>
+                }
+              />
+            </View>
+          </View>
+        </ScrollView>
+      </Image>
+      )
   }
 
   render() {
-    let profileUri = this.state.profileData.pictureUri;
+    let profileView;
+
+    if (this.state.isLoading) {
+      profileView = (
+        <View style={styling.spinnerContainer}>
+          <MKSpinner style={styling.spinner}/>
+        </View>
+      );
+    } else {
+      profileView = this.renderProfile();
+    }
+
     return (
       <View style={styles.container}>
         <Nav
           toHome={() => this.props.navigator.replace({id:'home'})}
           />
-        <Image style={custom.bgImage} source={require('../images/background.jpg')}>
-          <ScrollView style={custom.scrollViewStyle}>
-            <View style={custom.headerCardStyle}>
-                <Text style={[theme.cardContentStyle, custom.heroText]}>
-                  {this.state.profileHeadline.info}
-                </Text>
-            </View>
-            <View style={custom.profileCardStyle}>
-                <View style={custom.profileHeaderContentStyle}>
-                  <Image style={custom.imageCircle} source={{uri: profileUri}}/>
-                  <View style={custom.profileInfo}>
-                    <Text style={custom.name}>
-                      {this.state.profileData.name}
-                    </Text>
-                    <Text style={custom.occupation}>
-                      {this.state.profileData.occupation}
-                    </Text>
-                  </View>
-                  <View style={custom.profileNetworks}>
-                    <IconA name="facebook-official" color="#ffffff" size={25}/>
-                    <IconA name="linkedin-square" color="#ffffff" size={25} />
-                    <IconA name="instagram" color="#ffffff" size={25} style={{
-                        marginBottom: 10
-                      }}/>
-                  </View>
-                </View>
-                <View style={custom.profileContentStyle}>
-                  <Text style={custom.insights}>
-                    Insights
-                  </Text>
-                  <ListView
-                    enableEmptySections={true}
-                    dataSource={this.state.socialData}
-                    renderRow={(rowData) =>
-                      <View style={{flex:1,flexDirection:'row'}}>
-                      {this.renderSocialNetworkIcon(rowData.network)}
-                      <Text style={custom.contentText}> {rowData.info} </Text>
-                      </View>
-                    }
-                  />
-                </View>
-            </View>
-            <View style={styling.feedCard}>
-              <View style={styling.feedHeader}>
-                <IconA name="facebook" color="#ffffff" size={25}/>
-              </View>
-              <View style={styling.feedContent}>
-                <ListView
-                  enableEmptySections={true}
-                  dataSource={this.state.fbFeed}
-                  renderRow={(rowData) =>
-                    <View style={styling.feedRow}>
-                      <IconA name="angle-double-right" color="#ffffff" size={20}/>
-                      <View style={styling.feedItems}>
-                        {this.renderImage(rowData.img)}
-                        {this.renderText(rowData.info)}
-                      </View>
-                    </View>
-                  }
-                />
-              </View>
-            </View>
-            <View style={styling.feedCard}>
-              <View style={styling.feedHeader}>
-                <IconA name="linkedin-square" color="#ffffff" size={25}/>
-              </View>
-              <View style={styling.feedContent}>
-                <ListView
-                  enableEmptySections={true}
-                  dataSource={this.state.linkedinFeed}
-                  renderRow={(rowData) =>
-                    <View style={styling.feedRow}>
-                      <IconA name="angle-double-right" color="#ffffff" size={20}/>
-
-                      <View style={styling.feedItems}>
-                        {this.renderImage(rowData.img)}
-                        {this.renderText(rowData.info)}
-                      </View>
-                  </View>
-                  }
-                />
-              </View>
-            </View>
-            <View style={styling.feedCard}>
-              <View style={styling.feedHeader}>
-                <IconA name="instagram" color="#ffffff" size={25}/>
-              </View>
-              <View style={styling.feedContent}>
-                <ListView
-                  enableEmptySections={true}
-                  dataSource={this.state.instagramFeed}
-                  renderRow={(rowData) =>
-                    <View style={styling.feedRow}>
-                      <IconA name="angle-double-right" color="#ffffff" size={20}/> 
-                      <View style={styling.feedItems}>
-                        {this.renderImage(rowData.img)}
-                        {this.renderText(rowData.info)}
-                      </View>
-                    </View>
-                  }
-                />
-              </View>
-            </View>
-            <View style={styling.feedCard}>
-              <View style={styling.feedHeader}>
-                <IconA name="twitter" color="#ffffff" size={25}/>
-              </View>
-              <View style={styling.feedContent}>
-                <ListView
-                  enableEmptySections={true}
-                  dataSource={this.state.twitterFeed}
-                  renderRow={(rowData) =>
-                    <View style={styling.feedRow}>
-                    <IconA name="angle-double-right" color="#ffffff" size={20}/>
-                      <View style={styling.feedItems}>
-                        {this.renderImage(rowData.img)}
-                        {this.renderText(rowData.info)}
-                      </View>
-                    </View>
-                  }
-                />
-              </View>
-            </View>
-          </ScrollView>
-        </Image>
+        {profileView}
       </View>
     )
-  }
+  };
+
 }
 
 const styling = StyleSheet.create({
+  spinnerContainer: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  spinner: {
+    width: 50,
+    height: 50
+  },
   feedCard: {
     flex: 1,
     marginVertical: height * 0.015,
