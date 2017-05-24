@@ -25,7 +25,9 @@ export default class Home extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Nav toProfile={() => this.props.navigator.push({id: 'profile'})} toHome={() => this.props.navigator.replace({id: 'home'})}/>
+        <Nav toProfile={() => this.props.navigator.push({id: 'profile'})}
+             toHome={() => this.props.navigator.replace({id: 'home'})}
+             toSignup={() => this.props.navigator.replace({id: 'signup'})}/>
         <ScrollView style={styles.base}>
           <View style={styles.dateWrapper}>
             <View style={styles.dateLabel}>
@@ -99,7 +101,7 @@ export default class Home extends Component {
                     <View style={styles.attendeeInfoIndicatorView}>
                       <Iconz name="md-checkmark" color="#33cc33" size={20} style={{
                         margin: 10
-                      }}/> 
+                      }}/>
                     </View>
                   </View>
                 </TouchableOpacity>

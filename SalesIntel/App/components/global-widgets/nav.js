@@ -26,7 +26,7 @@ export default class Nav extends Component {
           </TouchableOpacity>
         </View>
         <View style={styles.actionsContainer}>
-          <TouchableOpacity onPress ={this.props.toSearch}>
+          <TouchableOpacity onPress ={this.props.toSignup}>
             <Iconz name="md-search" color="#555" size={30}  style={styles.actionFormatting}/>
           </TouchableOpacity>
           <TouchableOpacity onPress ={this.props.toAdd}>

@@ -10,6 +10,7 @@ import {Navigator} from 'react-native-deprecated-custom-components'
 
 import Home from './home';
 import Profile from './profile';
+import Signup from './signup/signup';
 
 export default class Index extends Component {
   constructor(props) {
@@ -35,13 +36,16 @@ export default class Index extends Component {
 
   renderScene(route, navigator) {
     var {state, actions} = this.props;
-    var routeId = route.id; 
+    var routeId = route.id;
 
     if (routeId === 'home') {
       return (<Home {...this.props} userData={route.userData} navigator={navigator}/>);
     }
     if (routeId === 'profile') {
       return (<Profile {...this.props} userData={route.userData} navigator={navigator}/>);
+    }
+    if (routeId === 'signup'){
+      return (<Signup {...this.props} userData={route.userData} navigator={navigator}/>);
     }
   }
 
