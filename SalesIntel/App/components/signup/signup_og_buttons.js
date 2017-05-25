@@ -30,7 +30,7 @@ import IconA from 'react-native-vector-icons/FontAwesome';
 
 const theme = getTheme();
 const styles = require('./styles');
-const MKCustomColors = require('./colors');
+
 const FBSDK = require('react-native-fbsdk');
 const {
   LoginManager,
@@ -38,29 +38,7 @@ const {
 
 const FacebookButton = MKButton.coloredButton()
   .build();
-
-const FacebookFab = MKButton.coloredFab()
-  .withBackgroundColor(MKCustomColors.Facebook)
-  .withStyle(styles.fab)
-  .build();
-
-const InstagramFab = MKButton.coloredFab()
-  .withBackgroundColor(MKCustomColors.Instagram)
-  .withStyle(styles.fab)
-  .build();
-
-const LinkedInFab = MKButton.coloredFab()
-  .withBackgroundColor(MKCustomColors.LinkedIn)
-  .withStyle(styles.fab)
-  .build();
-
-const PinterestFab = MKButton.coloredFab()
-  .withBackgroundColor(MKCustomColors.Pinterest)
-  .withStyle(styles.fab)
-  .build();
-
-const TwitterFab = MKButton.coloredFab()
-  .withBackgroundColor(MKCustomColors.Instagram)
+const ColoredFab = MKButton.coloredFab()
   .withStyle(styles.fab)
   .build();
 
@@ -96,21 +74,19 @@ export default class Signup extends Component {
             <Text>Add Social Networks for people to connect</Text>
           </View>
           <View style={styles.buttonContainer}>
-             <FacebookFab onPress={this.loadFacebookPermissions}>
+            <FacebookButton onPress={this.loadFacebookPermissions}>
+              <Text pointerEvents="none"
+                   style={{color: 'white', fontWeight: 'bold', alignItems: 'center'}}>
+                 <IconA name="facebook" color="#ffffff" size={15}/>
+                Login to Facebook
+             </Text>
+             </FacebookButton>
+             <ColoredFab onPress={this.loadFacebookPermissions}>
                <IconA name="facebook" color="#ffffff" size={30}/>
-             </FacebookFab>
-             <InstagramFab onPress={this.loadFacebookPermissions}>
-               <IconA name="instagram" color="#ffffff" size={30}/>
-             </InstagramFab>
-             <TwitterFab onPress={this.loadFacebookPermissions}>
-               <IconA name="twitter" color="#ffffff" size={30}/>
-             </TwitterFab>
-             <PinterestFab onPress={this.loadFacebookPermissions}>
-               <IconA name="pinterest" color="#ffffff" size={30}/>
-             </PinterestFab>
-             <LinkedInFab onPress={this.loadFacebookPermissions}>
-               <IconA name="linkedin" color="#ffffff" size={30}/>
-             </LinkedInFab>
+             </ColoredFab>
+            <FacebookButton onPress={this.loadFacebookPermissions}/>
+            <FacebookButton onPress={this.loadFacebookPermissions}/>
+            <FacebookButton onPress={this.loadFacebookPermissions}/>
           </View>
         </View>
       </View>

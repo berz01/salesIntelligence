@@ -1,18 +1,46 @@
-import {
-  StyleSheet
-} from 'react-native';
+import {StyleSheet, Dimensions} from 'react-native';
+
+var {height, width} = Dimensions.get('window');
 
 module.exports = StyleSheet.create({
-      base: {
-        flex: 1
-      },
-      container: {
-        flex: 1,
-        backgroundColor: '#F5FCFF'
-      },
-      loginBtn: { 
-      },
-      facebook: {
-        backgroundColor: '#4C69BA',
-    }
+  base: {
+    flex: 1
+  },
+  container: {
+    flex: 1,
+    backgroundColor: '#F5FCFF'
+  },
+  buttonContainer:{
+    flex: 1,
+    paddingHorizontal: width * 0.05,
+    paddingVertical: height * 0.05,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  headerContainer:{
+    paddingHorizontal: width * 0.10,
+    paddingTop: height * 0.10,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  buttonText: {
+    fontSize: 20,
+    fontFamily: 'Gill Sans',
+    textAlign: 'center',
+    color: '#ffffff',
+    margin: 10,
+    opacity: 0.8
+  },
+  linearGradient: {
+    flex: 1,
+    paddingLeft: 15,
+    paddingRight: 15,
+    borderRadius: 5
+  },
+  fab:{
+    width: 75,
+    height: 75,
+    borderRadius: 100,
+  }
+  
 })

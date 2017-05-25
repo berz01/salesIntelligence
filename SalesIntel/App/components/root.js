@@ -57,8 +57,8 @@ export default class Index extends Component {
         <Navigator style={{
           flex: 1
         }} ref={navigator => {this.navigator = navigator}} initialRoute={{
-          id: 'home',
-          name: 'home'
+          id: 'signup',
+          name: 'signup'
         }} renderScene={this.renderScene.bind(this)}/>
       </View>
     )
