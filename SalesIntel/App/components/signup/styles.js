@@ -12,10 +12,10 @@ module.exports = StyleSheet.create({
   },
   buttonContainer:{
     flex: 1,
-    paddingHorizontal: width * 0.05,
-    paddingVertical: height * 0.05,
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: 'row',
+    paddingHorizontal: width * 0.01,
+    paddingTop: height * 0.10,
+    justifyContent: 'space-around',
   },
   headerContainer:{
     paddingHorizontal: width * 0.10,

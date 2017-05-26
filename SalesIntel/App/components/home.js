@@ -22,6 +22,14 @@ import IconA from 'react-native-vector-icons/FontAwesome';
 var {height, width} = Dimensions.get('window') || 0;
 
 export default class Home extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isLoading: true,
+    };
+  }
+
   render() {
     return (
       <View style={styles.container}>
