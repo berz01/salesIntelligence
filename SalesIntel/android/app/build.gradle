@@ -125,8 +125,7 @@ android {
     }
 }
 
-dependencies {
-    compile project(':react-native-linear-gradient')
+dependencies { 
     compile project(':react-native-fbsdk')
     compile project(':react-native-material-kit')
     compile project(':react-native-vector-icons')

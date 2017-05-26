@@ -13,7 +13,8 @@ import {
   Dimensions,
   View,
   ScrollView,
-  ListView
+  ListView,
+  AsyncStorage
 } from 'react-native';
 
 import {
@@ -29,11 +30,14 @@ import Nav from '../global-widgets/nav';
 import IconA from 'react-native-vector-icons/FontAwesome';
 
 const theme = getTheme();
+const LOCAL_STORE_KEYS = require('../../containers/storagekeys');
+
 const styles = require('./styles');
 const MKCustomColors = require('./colors');
 const FBSDK = require('react-native-fbsdk');
 const {
   LoginManager,
+  AccessToken
 } = FBSDK;
 
 const FacebookButton = MKButton.coloredButton()
@@ -60,13 +64,14 @@ const PinterestFab = MKButton.coloredFab()
   .build();
 
 const TwitterFab = MKButton.coloredFab()
-  .withBackgroundColor(MKCustomColors.Instagram)
+  .withBackgroundColor(MKCustomColors.Twitter)
   .withStyle(styles.fab)
   .build();
 
 export default class Signup extends Component {
   constructor(props) {
     super(props);
+
   }
 
   loadFacebookPermissions(){
@@ -77,6 +82,26 @@ export default class Signup extends Component {
         } else {
           alert('Login success with permissions: '
             +result.grantedPermissions.toString());
+            console.log(result);
+            AccessToken.getCurrentAccessToken()
+            .then((data) => {
+              console.log(data);
+
+              AsyncStorage.setItem(LOCAL_STORE_KEYS.FacebookToken, data)
+              .catch((error) => {
+                console.log(error);
+              });
+            });
+
+            AccessToken.getUserId()
+            .then((data) => {
+              console.log(data);
+
+              AsyncStorage.setItem(LOCAL_STORE_KEYS.FacebookToken, data)
+              .catch((error) => {
+                console.log(error);
+              });
+            });
         }
       },
       function(error) {
@@ -93,7 +118,7 @@ export default class Signup extends Component {
           />
         <View style={styles.container}>
           <View style={styles.headerContainer}>
-            <Text>Add Social Networks for people to connect</Text>
+            <Text style={styles.titleMain}>Add your social networks</Text>
           </View>
           <View style={styles.buttonContainer}>
              <FacebookFab onPress={this.loadFacebookPermissions}>

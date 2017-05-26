@@ -20,8 +20,12 @@ module.exports = StyleSheet.create({
   headerContainer:{
     paddingHorizontal: width * 0.10,
     paddingTop: height * 0.10,
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'center',
+  },
+  titleMain: {
+    fontSize: 25,
+    margin: 2,
   },
   buttonText: {
     fontSize: 20,
@@ -42,5 +46,5 @@ module.exports = StyleSheet.create({
     height: 75,
     borderRadius: 100,
   }
-  
+
 })

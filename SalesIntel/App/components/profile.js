@@ -12,7 +12,8 @@ import {
   Dimensions,
   View,
   ScrollView,
-  ListView
+  ListView,
+  AsyncStorage
 } from 'react-native';
 
 import {
@@ -32,6 +33,7 @@ var {height, width} = Dimensions.get('window');
 
 const theme = getTheme();
 const styles = require('../styles');
+const LOCAL_STORE_KEYS = require('../containers/storagekeys');
 
 export default class Profile extends Component {
   constructor(props) {
@@ -79,9 +81,10 @@ export default class Profile extends Component {
 
   componentDidMount(){
     var _this = this;
+    var fbToken = AsyncStorage.getItem(LOCAL_STORE_KEYS.FacebookToken);
 
     Promise.all([Api.getProfile(),
-      Api.getFacebookFeed(),
+      Api.getFacebookFeed(fbToken),
       Api.getLinkedInFeed(),
       Api.getInstagramFeed(),
       Api.getTwitterFeed()])

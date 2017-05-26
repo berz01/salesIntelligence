@@ -1,5 +1,5 @@
 var Api = {
-  getProfile: function() {
+  getProfile: function(token) {
     var profile = {};
 
     return fetch('https://salesintel.herokuapp.com/api/v1/linkedin/maincall')
@@ -44,12 +44,14 @@ var Api = {
     });
 
   },
-  getFacebookFeed(){
-      return fetch('https://salesintel.herokuapp.com/api/v1/linkedin/maincall')
+  getFacebookFeed(token){
+      return fetch('https://salesintel.herokuapp.com/api/v1/facebook/profile/'+token)
       .then(response => response.json())
       .then(data => {
           var fbFeed = {};
           fbFeed.feed = [];
+
+          console.log('FACEBOOK', data);
 
           fbFeed.feed.push({
             info: "Favorite Teams: " + "Atlanta Falcons, UGA",
