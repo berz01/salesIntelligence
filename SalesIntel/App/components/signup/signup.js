@@ -85,19 +85,9 @@ export default class Signup extends Component {
             console.log(result);
             AccessToken.getCurrentAccessToken()
             .then((data) => {
-              console.log(data);
+              console.log("ACCESS TOKEN", data.accessToken);
 
-              AsyncStorage.setItem(LOCAL_STORE_KEYS.FacebookToken, data)
-              .catch((error) => {
-                console.log(error);
-              });
-            });
-
-            AccessToken.getUserId()
-            .then((data) => {
-              console.log(data);
-
-              AsyncStorage.setItem(LOCAL_STORE_KEYS.FacebookToken, data)
+              AsyncStorage.setItem(LOCAL_STORE_KEYS.FacebookToken, data.accessToken)
               .catch((error) => {
                 console.log(error);
               });

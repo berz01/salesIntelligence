@@ -29,6 +29,6 @@ api.get("/profile/:token", function(req, res) {
           res.send(body);
       });
         console.log("https://graph.facebook.com/me?" + profileParamList + "&access_token=" + accessToken);
-}); 
+});
 
 module.exports = api;

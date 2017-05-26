@@ -81,57 +81,34 @@ export default class Profile extends Component {
 
   componentDidMount(){
     var _this = this;
-    var fbToken = AsyncStorage.getItem(LOCAL_STORE_KEYS.FacebookToken);
+    AsyncStorage.getItem(LOCAL_STORE_KEYS.FacebookToken)
+    .then(fbToken => {
+      console.log("GOT FACEBOOK TOKEN", fbToken);
 
-    Promise.all([Api.getProfile(),
-      Api.getFacebookFeed(fbToken),
-      Api.getLinkedInFeed(),
-      Api.getInstagramFeed(),
-      Api.getTwitterFeed()])
-      .then(responses => {
-        console.log(responses);
-        _this.setState({
-          isLoading: false,
-          socialData: this.state.socialData.cloneWithRows(responses[0].feed),
-          profileData: responses[0].profileData,
-          profileHeadline: responses[0].profileHeadline,
-          fbFeed: this.state.fbFeed.cloneWithRows( responses[1].feed),
-          linkedinFeed: this.state.linkedinFeed.cloneWithRows( responses[2].feed),
-          instagramFeed: this.state.instagramFeed.cloneWithRows( responses[3].feed),
-          twitterFeed: this.state.twitterFeed.cloneWithRows( responses[4].feed),
+      Promise.all([Api.getProfile(),
+        Api.getFacebookFeed(fbToken),
+        Api.getLinkedInFeed(),
+        Api.getInstagramFeed(),
+        Api.getTwitterFeed()])
+        .then(responses => {
+          // console.log(responses);
+          _this.setState({
+            isLoading: false,
+            socialData: this.state.socialData.cloneWithRows(responses[0].feed),
+            profileData: responses[0].profileData,
+            profileHeadline: responses[0].profileHeadline,
+            fbFeed: this.state.fbFeed.cloneWithRows( responses[1].feed),
+            linkedinFeed: this.state.linkedinFeed.cloneWithRows( responses[2].feed),
+            instagramFeed: this.state.instagramFeed.cloneWithRows( responses[3].feed),
+            twitterFeed: this.state.twitterFeed.cloneWithRows( responses[4].feed),
+          });
+        })
+        .catch(e => {
+          console.log("EXCEPTION FOR ALL PROMISES", e);
         });
-      })
-      .catch(e => {
-        console.log("EXCEPTION FOR ALL PROMISES", e);
-      });
+    });
 
-    // Api.getFacebookFeed()
-    // .then(data => {
-    //     _this.setState({
-    //       fbFeed: this.state.fbFeed.cloneWithRows(data.feed)
-    //     })
-    // })
-    //
-    // Api.getLinkedInFeed()
-    // .then(data => {
-    //     _this.setState({
-    //       linkedinFeed: this.state.linkedinFeed.cloneWithRows(data.feed)
-    //     })
-    // })
-    //
-    // Api.getInstagramFeed()
-    // .then(data => {
-    //     _this.setState({
-    //       instagramFeed: this.state.instagramFeed.cloneWithRows(data.feed)
-    //     })
-    // })
-    //
-    // Api.getTwitterFeed()
-    // .then(data => {
-    //     _this.setState({
-    //       twitterFeed: this.state.twitterFeed.cloneWithRows(data.feed)
-    //     })
-    // })
+
   }
 
   renderProfile(){
