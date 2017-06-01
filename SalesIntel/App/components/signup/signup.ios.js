@@ -5,6 +5,7 @@
 
 import React, {Component} from 'react';
 import {
+  Platform,
   StyleSheet,
   Button,
   Image,
@@ -28,6 +29,7 @@ import {
 
 import Nav from '../global-widgets/nav';
 import IconA from 'react-native-vector-icons/FontAwesome';
+import CircleButton from 'react-native-circle-button';
 
 const theme = getTheme();
 const LOCAL_STORE_KEYS = require('../../containers/storagekeys');
@@ -35,8 +37,10 @@ const LOCAL_STORE_KEYS = require('../../containers/storagekeys');
 const styles = require('./styles');
 const MKCustomColors = require('./colors');
 const FBSDK = require('react-native-fbsdk');
+
+
 const {
-  LoginManager,
+  LoginButton,
   AccessToken
 } = FBSDK;
 
@@ -100,35 +104,20 @@ export default class Signup extends Component {
     );
   }
 
+
   render() {
     return (
       <View style={styles.base}>
         <Nav
           toHome={() => this.props.navigator.replace({id:'home'})}
           />
-        <View style={styles.container}>
-          <View style={styles.headerContainer}>
-            <Text style={styles.titleMain}>Add your social networks</Text>
+          <View style={{ flex: 1 }}>
+          <CircleButton onPressButtonTop={this.loadFacebookPermissions}>
+            <CircleButton name="facebook" color="#ffffff" size={85}/>
+          </CircleButton>
           </View>
-          <View style={styles.buttonContainer}>
-             <FacebookFab onPress={this.loadFacebookPermissions}>
-               <IconA name="facebook" color="#ffffff" size={30}/>
-             </FacebookFab>
-             <InstagramFab onPress={this.loadFacebookPermissions}>
-               <IconA name="instagram" color="#ffffff" size={30}/>
-             </InstagramFab>
-             <TwitterFab onPress={this.loadFacebookPermissions}>
-               <IconA name="twitter" color="#ffffff" size={30}/>
-             </TwitterFab>
-             <PinterestFab onPress={this.loadFacebookPermissions}>
-               <IconA name="pinterest" color="#ffffff" size={30}/>
-             </PinterestFab>
-             <LinkedInFab onPress={this.loadFacebookPermissions}>
-               <IconA name="linkedin" color="#ffffff" size={30}/>
-             </LinkedInFab>
-          </View>
-        </View>
       </View>
     )
   };
+
 }
