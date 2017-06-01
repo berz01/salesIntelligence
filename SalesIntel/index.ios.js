@@ -14,4 +14,4 @@ import {
 
 import SalesIntel from './App/containers/app';
 
-AppRegistry.registerComponent('Handshake', () => SalesIntel);
+AppRegistry.registerComponent('SalesIntel', () => SalesIntel);

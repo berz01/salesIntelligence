@@ -5,6 +5,7 @@
 
 import React, {Component} from 'react';
 import {
+  Platform,
   StyleSheet,
   Image,
   Text,
@@ -373,7 +374,15 @@ const custom = StyleSheet.create({
   name:{
     color: '#ffffff',
     fontWeight: '300',
-    fontFamily: 'sans-serif-thin',
+
+    ...Platform.select({
+      ios: {
+        fontFamily: 'GillSans-Light',
+      },
+      android: {
+        fontFamily: 'sans-serif-thin',
+      },
+    }),
     fontSize: 28
   },
   occupation:{

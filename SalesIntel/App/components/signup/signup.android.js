@@ -5,6 +5,7 @@
 
 import React, {Component} from 'react';
 import {
+  Platform,
   StyleSheet,
   Button,
   Image,
@@ -28,6 +29,7 @@ import {
 
 import Nav from '../global-widgets/nav';
 import IconA from 'react-native-vector-icons/FontAwesome';
+import CircleButton from 'react-native-circle-button';
 
 const theme = getTheme();
 const LOCAL_STORE_KEYS = require('../../containers/storagekeys');
@@ -78,8 +80,12 @@ export default class Signup extends Component {
     LoginManager.logInWithReadPermissions(['public_profile']).then(
       function(result) {
         if (result.isCancelled) {
+          console.log('####THIS NO RUN####');
           alert('Login cancelled');
         } else {
+          console.log('####THIS RAN####');
+          console.log('####THIS RAN####');
+          console.log('####THIS RAN####');
           alert('Login success with permissions: '
             +result.grantedPermissions.toString());
             console.log(result);
@@ -141,4 +147,5 @@ export default class Signup extends Component {
       </View>
     )
   };
+
 }
