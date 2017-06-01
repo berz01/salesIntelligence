@@ -1,4 +1,4 @@
-package com.handshake;
+package com.sofresh;
 
 import android.app.Application;
 
@@ -13,7 +13,6 @@ import com.facebook.soloader.SoLoader;
 
 import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
-import com.facebook.reactnative.androidsdk.FBSDKPackage;
 import com.facebook.appevents.AppEventsLogger;
 
 import java.util.Arrays;
@@ -37,10 +36,9 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new FBSDKPackage(),
             new FBSDKPackage(mCallbackManager),
-            new ReactMaterialKitPackage(),
-            new VectorIconsPackage()
+            new VectorIconsPackage(),
+            new ReactMaterialKitPackage()
       );
     }
   };
@@ -50,11 +48,13 @@ public class MainApplication extends Application implements ReactApplication {
     return mReactNativeHost;
   }
 
+  @SuppressWarnings("deprecation")
   @Override
   public void onCreate() {
-  FacebookSdk.sdkInitialize(getApplicationContext());
-  AppEventsLogger.activateApp(this);
+    FacebookSdk.sdkInitialize(getApplicationContext());
+    AppEventsLogger.activateApp(this);
     super.onCreate();
     SoLoader.init(this, /* native exopackage */ false);
   }
+
 }
