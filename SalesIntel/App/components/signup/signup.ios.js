@@ -41,6 +41,7 @@ const FBSDK = require('react-native-fbsdk');
 
 const {
   LoginButton,
+  LoginManager,
   AccessToken
 } = FBSDK;
 
