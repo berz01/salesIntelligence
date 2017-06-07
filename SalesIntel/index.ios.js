@@ -12,6 +12,6 @@ import {
   View
 } from 'react-native';
 
-import SalesIntel from './App/containers/app';
+import SoFresh from './App/containers/app';
 
-AppRegistry.registerComponent('SoFresh', () => SalesIntel);
+AppRegistry.registerComponent('SoFresh', () => SoFresh);
