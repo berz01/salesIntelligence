@@ -60,7 +60,7 @@ api.get('/return',
 api.get("/profile", function(req, res) {
   var accessToken = _this.accessToken;
   console.log(accessToken);
-  res.body(accessToken);
+  res.send(accessToken);
   // request({
   //     url: "https://graph.facebook.com/me?" + profileParamList + "&access_token=" + accessToken,
   //     method: "GET",
