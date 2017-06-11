@@ -45,11 +45,12 @@ passport.deserializeUser(function(obj, cb) {
   cb(null, obj);
 });
 
-app.get('/auth',
-  passport.authenticate('facebook', {
+app.get('/auth', function(req, res){
+  return passport.authenticate('facebook', {
     successRedirect: '/profile',
     failureRedirect: '/login'
-  }));
+  }))
+};
 
 api.get("/profile", function(req, res) {
   var accessToken = _this.accessToken;
