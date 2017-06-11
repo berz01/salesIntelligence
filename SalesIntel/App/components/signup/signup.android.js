@@ -78,7 +78,15 @@ export default class Signup extends Component {
   }
 
   loadFBPassportLogin(){
+    Linking.canOpenURL('https://salesintel.herokuapp.com/api/v1/facebook/auth')
+    .then(function(data){
+        console.log(data);
+    });
 
+    return Linking.openURL('https://salesintel.herokuapp.com/api/v1/facebook/auth')
+    .then(function(data){
+        console.log(data);
+    });
   }
 
   loadFacebookPermissions(){
@@ -128,7 +136,7 @@ export default class Signup extends Component {
             <Text style={styles.titleMain}>Add your social networks</Text>
           </View>
           <View style={styles.buttonContainer}>
-             <FacebookFab onPress={this.loadFBPassportLogin}>
+             <FacebookFab onPress={() => this.props.navigator.push({id: 'WebViewer'})}>
                <IconA name="facebook" color="#ffffff" size={30}/>
              </FacebookFab>
              <InstagramFab onPress={this.loadFacebookPermissions}>

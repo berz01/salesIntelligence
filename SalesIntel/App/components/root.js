@@ -11,6 +11,7 @@ import {Navigator} from 'react-native-deprecated-custom-components'
 import Home from './home';
 import Profile from './profile';
 import Signup from './signup/signup';
+import WebViewer from './web-login-viewer';
 
 export default class Index extends Component {
   constructor(props) {
@@ -46,6 +47,9 @@ export default class Index extends Component {
     }
     if (routeId === 'signup'){
       return (<Signup {...this.props} userData={route.userData} navigator={navigator}/>);
+    }
+    if (routeId === 'WebViewer'){
+      return (<WebViewer {...this.props} userData={route.userData} navigator={navigator}/>);
     }
   }
 

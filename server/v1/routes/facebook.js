@@ -45,12 +45,9 @@ passport.deserializeUser(function(obj, cb) {
   cb(null, obj);
 });
 
-api.get("/auth", function(req, res) {
-  return passport.authenticate('facebook');
-});
-app.get('/auth/facebook/callback',
+app.get('/auth',
   passport.authenticate('facebook', {
-    successRedirect: '/',
+    successRedirect: '/profile',
     failureRedirect: '/login'
   }));
 
