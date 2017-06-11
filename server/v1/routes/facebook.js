@@ -54,7 +54,7 @@ api.get('/auth',
   passport.authenticate('facebook'));
 
 api.get('/return',
-  passport.authenticate('facebook', { successRedirect: '/api/v1/linkedIn',
+  passport.authenticate('facebook', { successRedirect: '/api/v1/facebook/profile',
                                       failureRedirect: '/login' }));
 
 api.get("/profile", function(req, res) {
