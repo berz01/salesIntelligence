@@ -48,9 +48,9 @@ passport.deserializeUser(function(obj, cb) {
 app.get('/auth', function(req, res){
   return passport.authenticate('facebook', {
     successRedirect: '/profile',
-    failureRedirect: '/login'
-  }))
-};
+    failureRedirect: '/signup'
+  }
+}));
 
 api.get("/profile", function(req, res) {
   var accessToken = _this.accessToken;
