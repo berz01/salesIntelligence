@@ -3,6 +3,8 @@ var http = require('http');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var request = require('request');
+var passport = require('passport');
+var FacebookStrategy = require('passport-facebook').Strategy;
 var api = express.Router();
 
 api.use(bodyParser.json()); // support json encoded bodies
@@ -14,21 +16,55 @@ api.use(bodyParser.urlencoded({
 // must loggin to my app id
 // https://developers.facebook.com/tools/accesstoken/
 
-
+var accessToken = null;
 var profileParamList = "fields=id,photos.limit(4){link,name,id,comments.limit(0)},family,name,birthday,cover,favorite_teams,favorite_athletes,gender,hometown,education,interested_in,languages,location,political,relationship_status,religion,timezone,sports,website,work,about";
-var accessToken = "EAACEdEose0cBADcQb5uTgZAdEjN89sCSrZCh5CYUzZB3YoP6ZAYHhV2h3xybvukXJPHWq8oldoZAC4hfBrkZAcADMPW31BcBJE1NoftZBbYn2S6Jz9w8AZATeGxEvOWFl42jDPoku8QToc0FojgU5L47Xh0i9ZALZAlrDzIBduZB1ZBCjgbUU7ACZBliGFpS6Sh5n0k4ZD"
+var _this = this;
 
-api.get("/profile/:token", function(req, res) {
-      var accessToken = req.params.token || accessToken;
+passport.use(new FacebookStrategy({
+    clientID: '1278316618953869',
+    clientSecret: '5ff6ec4d95e96d084f3a8854c96324c1',
+    callbackURL: 'http://localhost:3000/login/facebook/return'
+  },
+  function(accessToken, refreshToken, profile, cb) {
+    _this.accessToken = accessToken;
+    // In this example, the user's Facebook profile is supplied as the user
+    // record.  In a production-quality application, the Facebook profile should
+    // be associated with a user record in the application's database, which
+    // allows for account linking and authentication with other identity
+    // providers.
+    return cb(null, profile);
+  }));
 
-      request({
-          url: "https://graph.facebook.com/me?" + profileParamList + "&access_token=" + accessToken,
-          method: "GET",
-          json: true
-      }, function(error, response, body) {
-          res.send(body);
-      });
-        console.log("https://graph.facebook.com/me?" + profileParamList + "&access_token=" + accessToken);
-}); 
+passport.serializeUser(function(user, cb) {
+  console.log("USER", user)
+  cb(null, user);
+});
+
+passport.deserializeUser(function(obj, cb) {
+  console.log("USER", obj)
+  cb(null, obj);
+});
+
+api.get("/auth", function(req, res) {
+  return passport.authenticate('facebook');
+});
+app.get('/auth/facebook/callback',
+  passport.authenticate('facebook', {
+    successRedirect: '/',
+    failureRedirect: '/login'
+  }));
+  
+api.get("/profile", function(req, res) {
+  var accessToken = _this.accessToken;
+  console.log(accessToken);
+  // request({
+  //     url: "https://graph.facebook.com/me?" + profileParamList + "&access_token=" + accessToken,
+  //     method: "GET",
+  //     json: true
+  // }, function(error, response, body) {
+  //     res.send(body);
+  // });
+  // console.log("https://graph.facebook.com/me?" + profileParamList + "&access_token=" + accessToken);
+});
 
 module.exports = api;

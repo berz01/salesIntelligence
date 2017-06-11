@@ -88,27 +88,30 @@ var Api = {
         linkedinFeed.feed = [];
 
         linkedinFeed.feed.push({
-          info: "Headline: Pushing the edge on product development!",
+          //headline
+          info: "Headline: " + data.headline,
           img: null
         });
 
         linkedinFeed.feed.push({
-          info: "Current Job: Software Developer for State Farm",
+          //curent job
+          info: "Current Job: " + data.positions.values[0].company.name +
+          " - " + data.positions.values[0].title,
+          img: null
+        });
+       //location
+        linkedinFeed.feed.push({
+          info: "Location: " + data.positions.values[0].location.name,
+          img: null
+        });
+        //date
+        linkedinFeed.feed.push({
+            info: "Date: " + data.positions.values[0].startDate.year,
           img: null
         });
 
         linkedinFeed.feed.push({
-          info: "Current Job: COO/CTO for NTerNow",
-          img: null
-        });
-
-        linkedinFeed.feed.push({
-          info: "Summary: A young tech entrepreneur trying to change the real estate from the bottom-up. A hardware driven platform that will forever change how the real estate industry does business. www.NterNow.com",
-          img: null
-        });
-
-        linkedinFeed.feed.push({
-          info: "Industry: Information Technology and Services",
+          info: "Industry: " + data.industry,
           img: null
         });
 
@@ -143,32 +146,27 @@ var Api = {
         var twitterFeed = {};
         twitterFeed.feed = [];
 
-        twitterFeed.feed.push({
-          info: "SF Flash Build presentation later today. Wish me luck!",
-          img: null
-        });
+        // twitterFeed.feed.push({
+        //   info: "Been working too hard this week; getting exhausted. #noSleep",
+        //   img: null
+        // });
+        //
+        // twitterFeed.feed.push({
+        //   info: "Shout out to my boy @adamBall for graduating from Georgia Tech today!",
+        //   img: null
+        // });
 
-        twitterFeed.feed.push({
-          info: "Been working too hard this week; getting exhausted. #noSleep",
-          img: null
-        });
-
-        twitterFeed.feed.push({
-          info: "Shout out to my boy @adamBall for graduating from Georgia Tech today!",
-          img: null
-        });
-
-        // for(var i=0; i < data.statuses.length; i++){
-        //   twitterFeed.feed.push({
-        //     info: data.statuses[i].text,
-        //     img: null
-        //   });
-        // }
+        for(var i=0; i < 3; i++){
+          twitterFeed.feed.push({
+            info: data.statuses[i].text,
+            img: null
+          });
+        }
 
         return twitterFeed;
     })
     .catch(e => {
-      console.log(e);
+      console.log("TWITTER ERROR!!" + e);
     })
   }
 };
