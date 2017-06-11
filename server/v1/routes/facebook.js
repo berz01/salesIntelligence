@@ -53,7 +53,7 @@ app.get('/auth/facebook/callback',
     successRedirect: '/',
     failureRedirect: '/login'
   }));
-  
+
 api.get("/profile", function(req, res) {
   var accessToken = _this.accessToken;
   console.log(accessToken);

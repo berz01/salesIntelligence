@@ -10,6 +10,7 @@ import {
   Button,
   Image,
   Text,
+  Linking,
   TouchableOpacity,
   Dimensions,
   View,
@@ -76,16 +77,16 @@ export default class Signup extends Component {
 
   }
 
+  loadFBPassportLogin(){
+
+  }
+
   loadFacebookPermissions(){
     LoginManager.logInWithReadPermissions(['public_profile']).then(
       function(result) {
         if (result.isCancelled) {
-          console.log('####THIS NO RUN####');
           alert('Login cancelled');
         } else {
-          console.log('####THIS RAN####');
-          console.log('####THIS RAN####');
-          console.log('####THIS RAN####');
           alert('Login success with permissions: '
             +result.grantedPermissions.toString());
             console.log(result);
@@ -127,7 +128,7 @@ export default class Signup extends Component {
             <Text style={styles.titleMain}>Add your social networks</Text>
           </View>
           <View style={styles.buttonContainer}>
-             <FacebookFab onPress={this.loadFacebookPermissions}>
+             <FacebookFab onPress={this.loadFBPassportLogin}>
                <IconA name="facebook" color="#ffffff" size={30}/>
              </FacebookFab>
              <InstagramFab onPress={this.loadFacebookPermissions}>
