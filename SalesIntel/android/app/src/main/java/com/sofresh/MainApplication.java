@@ -1,6 +1,7 @@
 package com.sofresh;
 
 import android.app.Application;
+import android.util.Log;
 
 import com.facebook.react.ReactApplication;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
@@ -36,7 +37,6 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new FBSDKPackage(),
             new FBSDKPackage(mCallbackManager),
             new VectorIconsPackage(),
             new ReactMaterialKitPackage()
@@ -52,6 +52,7 @@ public class MainApplication extends Application implements ReactApplication {
   @SuppressWarnings("deprecation")
   @Override
   public void onCreate() {
+    Log.i("TAG","PASSING ON CREATE");
     FacebookSdk.sdkInitialize(getApplicationContext());
     AppEventsLogger.activateApp(this);
     super.onCreate();
