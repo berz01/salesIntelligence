@@ -23,7 +23,7 @@ var _this = this;
 passport.use(new FacebookStrategy({
     clientID: '1278316618953869',
     clientSecret: '5ff6ec4d95e96d084f3a8854c96324c1',
-    callbackURL: 'http://localhost:3000/login/facebook/return'
+    callbackURL: 'https://salesintel.herokuapp.com/api/v1/facebook/return'
   },
   function(accessToken, refreshToken, profile, cb) {
     _this.accessToken = accessToken;
