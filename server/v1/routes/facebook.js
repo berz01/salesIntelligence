@@ -9,8 +9,8 @@ var api = express.Router();
 
 // Initialize Passport and restore authentication state, if any, from the
 // session.
-app.use(passport.initialize());
-app.use(passport.session());
+api.use(passport.initialize());
+api.use(passport.session());
 
 api.use(bodyParser.json()); // support json encoded bodies
 api.use(bodyParser.urlencoded({
