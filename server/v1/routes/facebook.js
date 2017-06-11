@@ -45,7 +45,7 @@ passport.deserializeUser(function(obj, cb) {
   cb(null, obj);
 });
 
-api.get('/login/facebook',
+api.get('/login/facebook/auth',
   passport.authenticate('facebook'));
 
 api.get('/login/facebook/return',
