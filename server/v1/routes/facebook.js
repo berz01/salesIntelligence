@@ -49,7 +49,7 @@ api.get('/auth',
   passport.authenticate('facebook'));
 
 api.get('/return',
-  passport.authenticate('facebook', { successRedirect: '/',
+  passport.authenticate('facebook', { successRedirect: '/profile',
                                       failureRedirect: '/login' }));
 
 api.get("/profile", function(req, res) {
