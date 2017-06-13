@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
 import { WebView, StyleSheet, View } from 'react-native';
-import {} from '../actions';
 import Nav from './global-widgets/nav';
 
-const LOCAL_STORE_KEYS = require('../../containers/storagekeys');
+const LOCAL_STORE_KEYS = require('../containers/storagekeys');
 
 export default class WebViewer extends Component {
 
   checkValidToken(){
       fetch('https://salesintel.herokuapp.com/api/v1/facebook/token')
-      .then(function(token){
+      .then(response => response.json())
+      .then(function(data){
+          var token = data;
+          console.log("TOKEN:", token);
+
           var expiredTimestamp = new Date().getTime() - (2 * 60 * 60 * 1000);
           var timestamp = token.split(':')[0];
 
@@ -25,6 +28,9 @@ export default class WebViewer extends Component {
               console.log(error);
             });
           }
+      })
+      .catch(function(error){
+        console.log("You suck:", error);
       });
   }
 

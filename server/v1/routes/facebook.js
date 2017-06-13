@@ -59,7 +59,11 @@ api.get('/return',
   }));
 
 api.get('/token', function(req, res) {
-  res.send(_this.accessToken + ":" + tokenDate);
+  var jsonToken = {
+    "fbToken": _this.accessToken + ":" + tokenDate
+  }
+  
+  res.send(jsonToken);
 });
 
 api.get("/profile/:token", function(req, res) {
