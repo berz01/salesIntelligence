@@ -51,7 +51,7 @@ var Api = {
           var fbFeed = {};
           fbFeed.feed = [];
 
-          console.log('FACEBOOK API ERROR', data);
+          console.log('FACEBOOK API DATA', data);
 
           fbFeed.feed.push({
             info: "Favorite Teams: " + "Atlanta Falcons, UGA",

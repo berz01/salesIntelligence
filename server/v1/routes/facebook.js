@@ -62,13 +62,13 @@ api.get('/token', function(req, res) {
   var jsonToken = {
     "fbToken": _this.accessToken + ":" + tokenDate
   }
-  
+
   res.send(jsonToken);
 });
 
 api.get("/profile/:token", function(req, res) {
   var accessToken = req.params.token || _this.accessToken;
-  var profileParamList = "fields=id,photos.limit(4){link,name,id,comments.limit(0)},family,name,birthday,cover,favorite_teams,favorite_athletes,gender,hometown,education,interested_in,languages,location,political,relationship_status,religion,timezone,sports,website,work,about";
+  var profileParamList = "fields=id,picture,photos.limit(4){link,name,id,comments.limit(0)},family,name,birthday,cover,favorite_teams,favorite_athletes,gender,hometown,education,interested_in,languages,location,political,relationship_status,religion,timezone,sports,website,work,about";
   request({
     url: "https://graph.facebook.com/me?" + profileParamList + "&access_token=" + accessToken,
     method: "GET",
