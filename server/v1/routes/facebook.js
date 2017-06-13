@@ -23,7 +23,7 @@ api.use(bodyParser.urlencoded({
 
 var accessToken = null;
 
-//Six days before today 
+//Six days before today
 var tokenDate =  new Date().getTime() + (30 * 24 * 60 * 60 * 1000);
 
 var _this = this;
@@ -62,10 +62,11 @@ api.get('/token', function(req, res) {
   res.send(_this.accessToken + ":" + tokenDate);
 });
 
-api.get("/profile", function(req, res) {
+api.get("/profile/:token", function(req, res) {
+  var accessToken = req.params.token || _this.accessToken;
   var profileParamList = "fields=id,photos.limit(4){link,name,id,comments.limit(0)},family,name,birthday,cover,favorite_teams,favorite_athletes,gender,hometown,education,interested_in,languages,location,political,relationship_status,religion,timezone,sports,website,work,about";
   request({
-    url: "https://graph.facebook.com/me?" + profileParamList + "&access_token=" + _this.accessToken,
+    url: "https://graph.facebook.com/me?" + profileParamList + "&access_token=" + accessToken,
     method: "GET",
     json: true
   }, function(error, response, body) {

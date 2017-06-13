@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { WebView, StyleSheet, View } from 'react-native';
 import {} from '../actions';
 import Nav from './global-widgets/nav';
-
-import Api from '';
+ 
+const LOCAL_STORE_KEYS = require('../../containers/storagekeys');
 
 export default class WebViewer extends Component {
+
   checkValidToken(){
       fetch('https://salesintel.herokuapp.com/api/v1/facebook/token')
       .then(function(token){
