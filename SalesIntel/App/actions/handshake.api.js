@@ -51,7 +51,7 @@ var Api = {
           var fbFeed = {};
           fbFeed.feed = [];
 
-          console.log('FACEBOOK', data);
+          console.log('FACEBOOK API ERROR', data);
 
           fbFeed.feed.push({
             info: "Favorite Teams: " + "Atlanta Falcons, UGA",
@@ -77,7 +77,7 @@ var Api = {
           return fbFeed;
       })
       .catch(e => {
-        console.log("FACEBOOK WY", e);
+        console.log("FACEBOOK ERROR", e);
       })
   },
   getLinkedInFeed(){
@@ -117,7 +117,9 @@ var Api = {
 
         return linkedinFeed;
     })
-    .catch(e => e);
+    .catch(e => {
+      console.log("LINKEDIN ERROR:", e);
+    });
   },
   getInstagramFeed(){
     return fetch('https://salesintel.herokuapp.com/api/v1/instagram/maincall')
@@ -146,6 +148,8 @@ var Api = {
         var twitterFeed = {};
         twitterFeed.feed = [];
 
+        console.log("TWITTER DATA:", data);
+
         for(var i=0; i < 3; i++){
           twitterFeed.feed.push({
             info: data.statuses[i].text,
@@ -156,11 +160,8 @@ var Api = {
         return twitterFeed;
     })
     .catch(e => {
-      console.log("TWITTER ERROR!!" + e);
+      console.log("TWITTER ERROR:", e);
     })
-  },
-  saveFacebookToken(){
-
   }
 };
 

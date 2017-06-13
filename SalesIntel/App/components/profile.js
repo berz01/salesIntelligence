@@ -88,7 +88,8 @@ export default class Profile extends Component {
       Api.getTwitterFeed()])
       .then(responses => {
         console.log(responses);
-        _this.setState({
+
+        var newState = {
           isLoading: false,
           socialData: this.state.socialData.cloneWithRows(responses[0].feed),
           profileData: responses[0].profileData,
@@ -96,13 +97,19 @@ export default class Profile extends Component {
           fbFeed: this.state.fbFeed.cloneWithRows( responses[1].feed),
           linkedinFeed: this.state.linkedinFeed.cloneWithRows( responses[2].feed),
           instagramFeed: this.state.instagramFeed.cloneWithRows( responses[3].feed),
-          twitterFeed: this.state.twitterFeed.cloneWithRows( responses[4].feed),
-        });
+        };
+
+        if(responses[4] != undefined){
+          newState += {  'twitterFeed': this.state.twitterFeed.cloneWithRows( responses[4].feed) }
+        }
+
+        _this.setState(newState);
       })
       .catch(e => {
         console.log("EXCEPTION FOR ALL PROMISES", e);
       });
 
+    // How to async load data
     // Api.getFacebookFeed()
     // .then(data => {
     //     _this.setState({
