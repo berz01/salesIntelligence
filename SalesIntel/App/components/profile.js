@@ -79,35 +79,40 @@ export default class Profile extends Component {
 
   componentDidMount(){
     var _this = this;
-    var fbToken = AsyncStorage.getItem(LOCAL_STORE_KEYS.FacebookToken);
 
-    Promise.all([Api.getProfile(),
-      Api.getFacebookFeed(fbToken),
-      Api.getLinkedInFeed(),
-      Api.getInstagramFeed(),
-      Api.getTwitterFeed()])
-      .then(responses => {
-        console.log(responses);
+    AsyncStorage.getItem(LOCAL_STORE_KEYS.FacebookToken)
+    .then((fbToken) => {
+      console.log('FBTOKEN:', fbToken);
 
-        var newState = {
-          isLoading: false,
-          socialData: this.state.socialData.cloneWithRows(responses[0].feed),
-          profileData: responses[0].profileData,
-          profileHeadline: responses[0].profileHeadline,
-          fbFeed: this.state.fbFeed.cloneWithRows( responses[1].feed),
-          linkedinFeed: this.state.linkedinFeed.cloneWithRows( responses[2].feed),
-          instagramFeed: this.state.instagramFeed.cloneWithRows( responses[3].feed),
-        };
+      Promise.all([Api.getProfile(),
+        Api.getFacebookFeed(fbToken),
+        Api.getLinkedInFeed(),
+        Api.getInstagramFeed(),
+        Api.getTwitterFeed()])
+        .then(responses => {
+          console.log(responses);
 
-        if(responses[4] != undefined){
-          newState += {  'twitterFeed': this.state.twitterFeed.cloneWithRows( responses[4].feed) }
-        }
+          var newState = {
+            isLoading: false,
+            socialData: this.state.socialData.cloneWithRows(responses[0].feed),
+            profileData: responses[0].profileData,
+            profileHeadline: responses[0].profileHeadline,
+            fbFeed: this.state.fbFeed.cloneWithRows( responses[1].feed),
+            linkedinFeed: this.state.linkedinFeed.cloneWithRows( responses[2].feed),
+            instagramFeed: this.state.instagramFeed.cloneWithRows( responses[3].feed),
+          };
 
-        _this.setState(newState);
-      })
-      .catch(e => {
-        console.log("EXCEPTION FOR ALL PROMISES", e);
-      });
+          if(responses[4] != undefined){
+            newState += {  'twitterFeed': this.state.twitterFeed.cloneWithRows( responses[4].feed) }
+          } 
+          _this.setState(newState);
+        })
+        .catch(e => {
+          console.log("EXCEPTION FOR ALL PROMISES", e);
+        });
+    });
+
+
 
     // How to async load data
     // Api.getFacebookFeed()

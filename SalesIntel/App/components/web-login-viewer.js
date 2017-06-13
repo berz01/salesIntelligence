@@ -25,8 +25,10 @@ export default class WebViewer extends Component {
 
         var expiredTimestamp = new Date().getTime() - (2 * 60 * 60 * 1000);
         var timestamp = token.split(':')[1];
-
-        if(expiredTimestamp < timestamp){
+        var token = token.split(':')[0];
+        console.log("TOKEN:", token);
+        
+        //if(expiredTimestamp < timestamp){
           AsyncStorage.setItem(LOCAL_STORE_KEYS.FacebookToken, token)
           .then(() => {
             this.handleBack();
@@ -34,7 +36,7 @@ export default class WebViewer extends Component {
           .catch((error) => {
             console.log(error);
           });
-        }
+        //}
       })
       .catch(function(error){
         console.log("You suck:", error);
