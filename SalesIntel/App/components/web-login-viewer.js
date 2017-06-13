@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { WebView, StyleSheet, View } from 'react-native';
 import {} from '../actions';
 import Nav from './global-widgets/nav';
- 
+
 const LOCAL_STORE_KEYS = require('../../containers/storagekeys');
 
 export default class WebViewer extends Component {
@@ -10,9 +10,13 @@ export default class WebViewer extends Component {
   checkValidToken(){
       fetch('https://salesintel.herokuapp.com/api/v1/facebook/token')
       .then(function(token){
-          var timestamp = new Date().getTime() - (2 * 60 * 60 * 1000);
+          var expiredTimestamp = new Date().getTime() - (2 * 60 * 60 * 1000);
+          var timestamp = token.split(':')[0];
 
-          if(token.split(':')[0] > timestamp){
+          console.log("EXPIRED TIMESTAMP:", timestamp);
+          console.log("TIMESTAMP:", timestamp);
+
+          if(expiredTimestamp < timestamp){
             AsyncStorage.setItem(LOCAL_STORE_KEYS.FacebookToken, token)
             .then(function(){
               this.props.navigator.pop();
