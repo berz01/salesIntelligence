@@ -22,7 +22,10 @@ api.use(bodyParser.urlencoded({
 // https://developers.facebook.com/tools/accesstoken/
 
 var accessToken = null;
-var profileParamList = "fields=id,photos.limit(4){link,name,id,comments.limit(0)},family,name,birthday,cover,favorite_teams,favorite_athletes,gender,hometown,education,interested_in,languages,location,political,relationship_status,religion,timezone,sports,website,work,about";
+
+//Six days before today 
+var tokenDate =  new Date().getTime() + (30 * 24 * 60 * 60 * 1000);
+
 var _this = this;
 
 passport.use(new FacebookStrategy({
@@ -32,11 +35,7 @@ passport.use(new FacebookStrategy({
   },
   function(accessToken, refreshToken, profile, cb) {
     _this.accessToken = accessToken;
-    // In this example, the user's Facebook profile is supplied as the user
-    // record.  In a production-quality application, the Facebook profile should
-    // be associated with a user record in the application's database, which
-    // allows for account linking and authentication with other identity
-    // providers.
+    _this.tokenDate = new Date().getTime();
     return cb(null, profile);
   }));
 
@@ -54,21 +53,25 @@ api.get('/auth',
   passport.authenticate('facebook'));
 
 api.get('/return',
-  passport.authenticate('facebook', { successRedirect: '/api/v1/facebook/profile',
-                                      failureRedirect: '/login' }));
+  passport.authenticate('facebook', {
+    successRedirect: '/api/v1/facebook/token',
+    failureRedirect: '/api/v1/facebook/auth'
+  }));
+
+api.get('/token', function(req, res) {
+  res.send(_this.accessToken + ":" + tokenDate);
+});
 
 api.get("/profile", function(req, res) {
-  var accessToken = _this.accessToken;
-  console.log(accessToken);
-  res.send(accessToken);
-  // request({
-  //     url: "https://graph.facebook.com/me?" + profileParamList + "&access_token=" + accessToken,
-  //     method: "GET",
-  //     json: true
-  // }, function(error, response, body) {
-  //     res.send(body);
-  // });
-  // console.log("https://graph.facebook.com/me?" + profileParamList + "&access_token=" + accessToken);
+  var profileParamList = "fields=id,photos.limit(4){link,name,id,comments.limit(0)},family,name,birthday,cover,favorite_teams,favorite_athletes,gender,hometown,education,interested_in,languages,location,political,relationship_status,religion,timezone,sports,website,work,about";
+  request({
+    url: "https://graph.facebook.com/me?" + profileParamList + "&access_token=" + _this.accessToken,
+    method: "GET",
+    json: true
+  }, function(error, response, body) {
+    res.send(body);
+  });
+  console.log("https://graph.facebook.com/me?" + profileParamList + "&access_token=" + _this.accessToken);
 });
 
 module.exports = api;

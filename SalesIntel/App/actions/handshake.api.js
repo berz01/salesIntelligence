@@ -146,16 +146,6 @@ var Api = {
         var twitterFeed = {};
         twitterFeed.feed = [];
 
-        // twitterFeed.feed.push({
-        //   info: "Been working too hard this week; getting exhausted. #noSleep",
-        //   img: null
-        // });
-        //
-        // twitterFeed.feed.push({
-        //   info: "Shout out to my boy @adamBall for graduating from Georgia Tech today!",
-        //   img: null
-        // });
-
         for(var i=0; i < 3; i++){
           twitterFeed.feed.push({
             info: data.statuses[i].text,
@@ -168,6 +158,9 @@ var Api = {
     .catch(e => {
       console.log("TWITTER ERROR!!" + e);
     })
+  },
+  saveFacebookToken(){
+
   }
 };
 
