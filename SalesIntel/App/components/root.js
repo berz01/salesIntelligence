@@ -20,11 +20,12 @@ export default class Index extends Component {
 
     this.handleBack = (() => {
       if (this.navigator && this.navigator.getCurrentRoutes().length > 1){
+        console.log("NAV:", this.navigator);
         this.navigator.pop();
         return true;
       }
       return false;
-    }).bind(this)
+    }).bind(this);
   }
 
   componentDidMount() {
