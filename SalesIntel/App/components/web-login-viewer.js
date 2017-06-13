@@ -49,7 +49,7 @@ export default class WebViewer extends Component {
           />
         <WebView
           onLoadEnd={this.checkValidToken()}
-          source={{uri:'https://salesintel.herokuapp.com/api/v1/facebook/auth'}}
+          source={{uri: this.props.url}}
         />
       </View>
     );

@@ -135,7 +135,8 @@ export default class Signup extends Component {
             <Text style={styles.titleMain}>Add your social networks</Text>
           </View>
           <View style={styles.buttonContainer}>
-             <FacebookFab onPress={() => this.props.navigator.push({id: 'WebViewer'})}>
+             <FacebookFab onPress={() => this.props.navigator.push({id: 'WebViewer',
+               url: 'https://salesintel.herokuapp.com/api/v1/facebook/auth'})}>
                <IconA name="facebook" color="#ffffff" size={30}/>
              </FacebookFab>
              <InstagramFab onPress={this.loadFacebookPermissions}>

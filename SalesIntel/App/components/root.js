@@ -38,7 +38,7 @@ export default class Index extends Component {
 
   renderScene(route, navigator) {
     var {state, actions} = this.props;
-    var routeId = route.id;
+    var routeId = route.id; 
 
     if (routeId === 'home') {
       return (<Home {...this.props} userData={route.userData} navigator={navigator}/>);
@@ -50,7 +50,7 @@ export default class Index extends Component {
       return (<Signup {...this.props} userData={route.userData} navigator={navigator}/>);
     }
     if (routeId === 'WebViewer'){
-      return (<WebViewer {...this.props} userData={route.userData} navigator={navigator}/>);
+      return (<WebViewer {...this.props} userData={route.userData} navigator={navigator} url={route.url} />);
     }
   }
 
