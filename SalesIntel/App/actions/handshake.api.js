@@ -50,9 +50,13 @@ var Api = {
       .then(data => {
           var fbFeed = {};
           fbFeed.feed = [];
+          fbFeed.info = {};
 
           console.log('FACEBOOK API DATA', data);
-
+          fbFeed.info = {
+            name: data.name,
+            pictureUri: data.picture
+          }
           fbFeed.feed.push({
             info: "Favorite Teams: " + "Atlanta Falcons, UGA",
             img: null

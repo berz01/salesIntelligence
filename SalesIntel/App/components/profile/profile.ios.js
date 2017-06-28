@@ -1,8 +1,8 @@
 
 
 import React, {Component} from 'react';
+
 import {
-  Platform,
   StyleSheet,
   Image,
   Text,
@@ -22,16 +22,16 @@ import {
   getTheme,
   setTheme
 } from 'react-native-material-kit';
-
-import Nav from './global-widgets/nav'
+ 
+import Nav from '../global-widgets/nav'
 import IconA from 'react-native-vector-icons/FontAwesome';
-import Api from '../actions/handshake.api';
+import Api from '../../actions/handshake.api';
+import LOCAL_STORE_KEYS from '../../containers/storagekeys'
 
-var {height, width} = Dimensions.get('window');
 
+import styles from './styles';
+import custom from './customStyles';
 const theme = getTheme();
-const styles = require('../styles');
-const LOCAL_STORE_KEYS = require('../containers/storagekeys');
 
 export default class Profile extends Component {
   constructor(props) {
@@ -68,12 +68,12 @@ export default class Profile extends Component {
 
   renderImage(image){
     if(image != null){
-      return <Image style={styling.feedImage} source={{uri: image}}/>
+      return <Image style={styles.feedImage} source={{uri: image}}/>
     }
   }
   renderText(text){
     if(text != null){
-      return <Text style={styling.feedText}>{text}</Text>
+      return <Text style={styles.feedText}>{text}</Text>
     }
   }
 
@@ -104,50 +104,19 @@ export default class Profile extends Component {
 
           if(responses[4] != undefined){
             newState += {  'twitterFeed': this.state.twitterFeed.cloneWithRows( responses[4].feed) }
-          } 
+          }
           _this.setState(newState);
         })
         .catch(e => {
           console.log("EXCEPTION FOR ALL PROMISES", e);
         });
     });
-
-
-
-    // How to async load data
-    // Api.getFacebookFeed()
-    // .then(data => {
-    //     _this.setState({
-    //       fbFeed: this.state.fbFeed.cloneWithRows(data.feed)
-    //     })
-    // })
-    //
-    // Api.getLinkedInFeed()
-    // .then(data => {
-    //     _this.setState({
-    //       linkedinFeed: this.state.linkedinFeed.cloneWithRows(data.feed)
-    //     })
-    // })
-    //
-    // Api.getInstagramFeed()
-    // .then(data => {
-    //     _this.setState({
-    //       instagramFeed: this.state.instagramFeed.cloneWithRows(data.feed)
-    //     })
-    // })
-    //
-    // Api.getTwitterFeed()
-    // .then(data => {
-    //     _this.setState({
-    //       twitterFeed: this.state.twitterFeed.cloneWithRows(data.feed)
-    //     })
-    // })
   }
 
   renderProfile(){
       let profileUri = this.state.profileData.pictureUri;
       return (
-      <Image style={custom.bgImage} source={require('../images/background.jpg')}>
+      <Image style={custom.bgImage} source={require('../../images/background.jpg')}>
         <ScrollView style={custom.scrollViewStyle}>
           <View style={custom.headerCardStyle}>
               <Text style={[theme.cardContentStyle, custom.heroText]}>
@@ -189,18 +158,18 @@ export default class Profile extends Component {
                 />
               </View>
           </View>
-          <View style={styling.feedCard}>
-            <View style={styling.feedHeader}>
+          <View style={styles.feedCard}>
+            <View style={styles.feedHeader}>
               <IconA name="facebook" color="#ffffff" size={25}/>
             </View>
-            <View style={styling.feedContent}>
+            <View style={styles.feedContent}>
               <ListView
                 enableEmptySections={true}
                 dataSource={this.state.fbFeed}
                 renderRow={(rowData) =>
-                  <View style={styling.feedRow}>
+                  <View style={styles.feedRow}>
                     <IconA name="angle-double-right" color="#ffffff" size={20}/>
-                    <View style={styling.feedItems}>
+                    <View style={styles.feedItems}>
                       {this.renderImage(rowData.img)}
                       {this.renderText(rowData.info)}
                     </View>
@@ -209,19 +178,19 @@ export default class Profile extends Component {
               />
             </View>
           </View>
-          <View style={styling.feedCard}>
-            <View style={styling.feedHeader}>
+          <View style={styles.feedCard}>
+            <View style={styles.feedHeader}>
               <IconA name="linkedin-square" color="#ffffff" size={25}/>
             </View>
-            <View style={styling.feedContent}>
+            <View style={styles.feedContent}>
               <ListView
                 enableEmptySections={true}
                 dataSource={this.state.linkedinFeed}
                 renderRow={(rowData) =>
-                  <View style={styling.feedRow}>
+                  <View style={styles.feedRow}>
                     <IconA name="angle-double-right" color="#ffffff" size={20}/>
 
-                    <View style={styling.feedItems}>
+                    <View style={styles.feedItems}>
                       {this.renderImage(rowData.img)}
                       {this.renderText(rowData.info)}
                     </View>
@@ -230,18 +199,18 @@ export default class Profile extends Component {
               />
             </View>
           </View>
-          <View style={styling.feedCard}>
-            <View style={styling.feedHeader}>
+          <View style={styles.feedCard}>
+            <View style={styles.feedHeader}>
               <IconA name="instagram" color="#ffffff" size={25}/>
             </View>
-            <View style={styling.feedContent}>
+            <View style={styles.feedContent}>
               <ListView
                 enableEmptySections={true}
                 dataSource={this.state.instagramFeed}
                 renderRow={(rowData) =>
-                  <View style={styling.feedRow}>
+                  <View style={styles.feedRow}>
                     <IconA name="angle-double-right" color="#ffffff" size={20}/>
-                    <View style={styling.feedItems}>
+                    <View style={styles.feedItems}>
                       {this.renderImage(rowData.img)}
                       {this.renderText(rowData.info)}
                     </View>
@@ -250,18 +219,18 @@ export default class Profile extends Component {
               />
             </View>
           </View>
-          <View style={styling.feedCard}>
-            <View style={styling.feedHeader}>
+          <View style={styles.feedCard}>
+            <View style={styles.feedHeader}>
               <IconA name="twitter" color="#ffffff" size={25}/>
             </View>
-            <View style={styling.feedContent}>
+            <View style={styles.feedContent}>
               <ListView
                 enableEmptySections={true}
                 dataSource={this.state.twitterFeed}
                 renderRow={(rowData) =>
-                  <View style={styling.feedRow}>
+                  <View style={styles.feedRow}>
                   <IconA name="angle-double-right" color="#ffffff" size={20}/>
-                    <View style={styling.feedItems}>
+                    <View style={styles.feedItems}>
                       {this.renderImage(rowData.img)}
                       {this.renderText(rowData.info)}
                     </View>
@@ -280,8 +249,8 @@ export default class Profile extends Component {
 
     if (this.state.isLoading) {
       profileView = (
-        <View style={styling.spinnerContainer}>
-          <MKSpinner style={styling.spinner}/>
+        <View style={styles.spinnerContainer}>
+          <MKSpinner style={styles.spinner}/>
         </View>
       );
     } else {
@@ -289,7 +258,7 @@ export default class Profile extends Component {
     }
 
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, platStyle.container]}>
         <Nav
           toHome={() => this.props.navigator.replace({id:'home'})}
           />
@@ -297,197 +266,10 @@ export default class Profile extends Component {
       </View>
     )
   };
-
 }
 
-const styling = StyleSheet.create({
-  spinnerContainer: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  spinner: {
-    width: 50,
-    height: 50
-  },
-  feedCard: {
-    flex: 1,
-    marginVertical: height * 0.015,
-    marginHorizontal: width * 0.05,
-    padding: 25,
-    backgroundColor: '#303030',
-    borderRadius: 1,
-    borderColor: '#303030',
-    borderWidth: 1,
-    shadowColor: 'rgba(0, 0, 0, 0.12)',
-    shadowOpacity: 0.8,
-    shadowRadius: 2,
-    shadowOffset: {
-      height: 1,
-      width: 2
-    }
-  },
-  feedContent:{
-      flex:1,
-      flexDirection:'column',
-      justifyContent: 'flex-end',
-  },
-  feedItems:{
-      flex:1,
-      paddingLeft:5
-  },
-  feedHeader:{
-      flex:1,
-      flexDirection:'column',
-      justifyContent: 'flex-end',
-      borderBottomColor:  'rgba(255, 255, 255, 0.75)',
-      borderBottomWidth: 2,
-      paddingBottom:10
-  },
-  feedRow: {
-      flex:1,
-      flexDirection:'row',
-      alignItems: 'flex-start',
-      justifyContent: 'flex-start',
-      paddingVertical:10,
-      paddingRight:10,
-      borderBottomColor:  'rgba(255, 255, 255, 0.5)',
-      borderBottomWidth: StyleSheet.hairlineWidth,
-  },
-  feedText: {
-      color: '#ffffff',
-      minHeight: 20,
-      fontSize: 14
-  },
-  feedImage: {
-    height:300,
-    width:300,
-    borderRadius: 2
-  },
-});
-
-const custom = StyleSheet.create({
-  imageCircle: {
-    height: 100,
-    borderRadius: 50,
-    width: 100
-  },
-  bgImage: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: null,
-    height: null
-  },
-  name:{
-    color: '#ffffff',
-    fontWeight: '300',
-
-    ...Platform.select({
-      ios: {
-        fontFamily: 'GillSans-Light',
-      },
-      android: {
-        fontFamily: 'sans-serif-thin',
-      },
-    }),
-    fontSize: 28
-  },
-  occupation:{
-    color: '#ffffff',
-    fontSize: 12
-  },
-  contentHeader:{
-    color: '#ffffff',
-    minHeight: 50,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    minWidth: width * 0.9,
-    fontSize: 16
-  },
-  insights:{
-    color: '#ffffff',
-    minHeight: 50,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    fontSize: 16,
-  },
-  heroText:{
-    color: '#ffffff',
-    minHeight: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
-    minWidth: width * 0.9,
-    fontSize: 16
-  },
-  contentText:{
-    flex:1,
-    color: '#ffffff',
-    minHeight: 50,
-    paddingLeft:5,
-    justifyContent: 'center',
-    alignItems: 'center',
-    fontSize: 14
-  },
-  scrollViewStyle: {
-    flex: 1
-  },
-  profileInfo:{
-      flex:1,
-      flexDirection:'column',
-      justifyContent: 'flex-end',
-      paddingLeft:10
-  },
-  profileContentStyle:{
-      flex:1,
-      padding:20
-  },
-  profileHeaderContentStyle:{
-      flex:1,
-      flexDirection:'row',
-      paddingTop:20,
-      paddingBottom:20,
-      paddingLeft:20
-  },
-  profileNetworks:{
-      flex:1,
-      flexDirection:'column',
-      justifyContent: 'space-between',
-      maxWidth: width * 0.075,
-      marginRight: 5
-  },
-  profileCardStyle: {
-    flex: 1,
-    marginTop: height * 0.4,
-    marginBottom: height * 0.015,
-    marginHorizontal: width * 0.05,
-    backgroundColor: '#303030',
-    borderRadius: 1,
-    borderColor: '#303030',
-    borderWidth: 1,
-    shadowColor: 'rgba(0, 0, 0, 0.12)',
-    shadowOpacity: 0.8,
-    shadowRadius: 2,
-    shadowOffset: {
-      height: 1,
-      width: 2
-    }
-  },
-  headerCardStyle: {
-    flex: 1,
-    marginTop: height * 0.05,
-    marginHorizontal: width * 0.05,
-    backgroundColor: '#303030',
-    borderRadius: 1,
-    borderColor: '#303030',
-    borderWidth: 1,
-    shadowColor: 'rgba(0, 0, 0, 0.12)',
-    shadowOpacity: 0.8,
-    shadowRadius: 2,
-    shadowOffset: {
-      height: 1,
-      width: 2
-    }
+const platStyle = StyleSheet.create({
+  container:{
+    marginTop: 0,
   }
 });

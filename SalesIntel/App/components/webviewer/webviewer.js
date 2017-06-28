@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { WebView, StyleSheet, View, AsyncStorage } from 'react-native';
-import Nav from './global-widgets/nav';
 
-const LOCAL_STORE_KEYS = require('../containers/storagekeys');
+import Nav from '../global-widgets/nav';
+import styles from './styles';
+
+const LOCAL_STORE_KEYS = require('../../containers/storagekeys');
 
 export default class WebViewer extends Component {
   constructor(props) {
@@ -27,7 +29,7 @@ export default class WebViewer extends Component {
         var timestamp = token.split(':')[1];
         var token = token.split(':')[0];
         console.log("TOKEN:", token);
-        
+
         //if(expiredTimestamp < timestamp){
           AsyncStorage.setItem(LOCAL_STORE_KEYS.FacebookToken, token)
           .then(() => {
@@ -57,13 +59,3 @@ export default class WebViewer extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  base: {
-    flex: 1
-  },
-  container: {
-    flex: 1,
-    backgroundColor: '#F5FCFF'
-  },
-});

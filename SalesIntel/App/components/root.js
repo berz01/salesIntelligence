@@ -8,10 +8,10 @@ import {StyleSheet, Image, Text, TouchableOpacity, BackHandler, View} from 'reac
 
 import {Navigator} from 'react-native-deprecated-custom-components'
 
-import Home from './home';
-import Profile from './profile';
+import Home from './home/home';
+import Profile from './profile/profile';
 import Signup from './signup/signup';
-import WebViewer from './web-login-viewer';
+import WebViewer from './webviewer/webviewer';
 
 export default class Index extends Component {
   constructor(props) {
@@ -38,7 +38,7 @@ export default class Index extends Component {
 
   renderScene(route, navigator) {
     var {state, actions} = this.props;
-    var routeId = route.id; 
+    var routeId = route.id;
 
     if (routeId === 'home') {
       return (<Home {...this.props} userData={route.userData} navigator={navigator}/>);
