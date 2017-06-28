@@ -1,4 +1,5 @@
 import {
+  Platform,
   StyleSheet,
   Dimensions,
 } from 'react-native';
@@ -9,8 +10,7 @@ export default StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'stretch',
-    backgroundColor: '#F5FCFF',
-    padding: 20,  
+    backgroundColor: '#F5FCFF',  
   },
   spinnerContainer: {
     flex: 1,

@@ -22,7 +22,7 @@ import {
   getTheme,
   setTheme
 } from 'react-native-material-kit';
- 
+
 import Nav from '../global-widgets/nav'
 import IconA from 'react-native-vector-icons/FontAwesome';
 import Api from '../../actions/handshake.api';

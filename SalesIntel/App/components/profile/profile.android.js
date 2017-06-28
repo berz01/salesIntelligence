@@ -259,7 +259,7 @@ export default class Profile extends Component {
     }
 
     return (
-      <View style={[styles.container, platStyle.container]}>
+      <View style={styles.container}>
         <Nav
           toHome={() => this.props.navigator.replace({id:'home'})}
           />
@@ -268,9 +268,3 @@ export default class Profile extends Component {
     )
   };
 }
-
-const platStyle = StyleSheet.create({
-  container:{
-    marginTop: 56,
-  }
-});
