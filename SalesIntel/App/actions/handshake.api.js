@@ -1,21 +1,10 @@
 var Api = {
   getProfile: function(token) {
-    var profile = {};
 
-    return fetch('https://salesintel.herokuapp.com/api/v1/linkedin/maincall')
+    return fetch('https://salesintel.herokuapp.com/api/v1/facebook/profile/'+token)
     .then(response => response.json())
-    .then(data => {
-      var firstName = data.currentShare.author.firstName;
-      var lastName = data.currentShare.author.lastName;
-      var title = data.positions.values[0].title;
-      var company = data.positions.values[0].company.name;
-      var pictureUri = data.pictureUrl;
-
-      profile.profileData = {
-        "name": firstName + ' ' + "davis",
-        "occupation": "Dev" + " at " + "State Farm",
-        "pictureUri": pictureUri
-      }
+    .then(response => {
+      var profile = {};
 
       profile.profileHeadline = {
         network: 'twitter',
@@ -23,65 +12,117 @@ var Api = {
         img: null
       }
 
-      profile.feed = [{
+      profile.profileData = {
+        name: response.name,
+        pictureUri: response.picture.data.uri
+      }
+
+      if(response.work != undefined){
+        profile.occupation = response.work.position.title + " at " + response.work.employer.name ,
+      }
+ 
+      if(response.work != undefined){
+        var startdate = start_date != "0000-00" ? " since " + response.work.start_date : "";
+        profile.feed.push({
           network: 'facebook',
-          info: "Job: Software Developer at State Farm since 2012",
+          info: "Job: " + response.work.employer.name + " as " + response.work.position.title + startdate,
           img: null
-        }, {
+        });
+      }
+      if(response.relationship_status != undefined){
+        profile.feed.push({
           network: 'facebook',
-          info: "Relationship Status: In A relationship with Catherine Unkles",
+          info: "Relationship Status: " + response.relationship_status,
           img: null
-        }, {
+        });
+      }
+      if(response.location != undefined){
+        profile.feed.push({
           network: 'facebook',
-          info: "Location: Atlanta, Georgia",
+          info: "Location: " + response.location.name,
           img: null
-        }]
+        });
+      }
+
+      if(profile.feed.length < 2 && response.cover != undefined){
+        profile.feed.push({
+          network: 'facebook',
+          info: "Cover photo",
+          img: response.cover.source
+        });
+      }
 
         return profile;
     })
     .catch(e => {
-      console.log("catch error occured:", e)
+      console.log("GET PROFILE ERROR:", e)
     });
 
+  },
+  getFacebookProfile(token){
+    return fetch('https://salesintel.herokuapp.com/api/v1/facebook/profile/'+token)
+    .then(response => response.json())
+    .then(data => {
+        return data;
+    })
+    .catch(e => {
+      console.log("FACEBOOK PROFILE GET ERROR", e);
+    })
   },
   getFacebookFeed(token){
       return fetch('https://salesintel.herokuapp.com/api/v1/facebook/profile/'+token)
       .then(response => response.json())
-      .then(data => {
+      .then(response => {
           var fbFeed = {};
           fbFeed.feed = [];
           fbFeed.info = {};
 
-          console.log('FACEBOOK API DATA', data);
           fbFeed.info = {
-            name: data.name,
-            pictureUri: data.picture
+            name: response.name,
+            pictureUri: response.picture.data.uri
           }
-          fbFeed.feed.push({
-            info: "Favorite Teams: " + "Atlanta Falcons, UGA",
-            img: null
-          });
-          fbFeed.feed.push({
-            info: "Political beliefs: " + "Not republicans",
-            img: null
-          });
-          fbFeed.feed.push({
-            info: "Gender: " + "Male",
-            img: null
-          });
-          fbFeed.feed.push({
-            info: "Birthday: " + "6/18/1989 " + "age: "+ "27",
-            img: null
-          });
-          fbFeed.feed.push({
-            info: "Interested In: " + "Movies, Cars, Baby, Books, Startups, Tech",
-            img: null
-          });
+
+          if(response.gender != undefined){
+            fbFeed.feed.push({
+              info: "Gender: " + response.gender,
+              img: null
+            });
+          }
+          if(response.birthday != undefined){
+            fbFeed.feed.push({
+              info: "Birthday: " + response.birthday,
+              img: null
+            });
+          }
+          if(response.hometown != undefined){
+            fbFeed.feed.push({
+              info: response.name + "'s hometown is " + response.hometown.name,
+              img: null
+            });
+          }
+          if(response.favorite_teams != undefined){
+            fbFeed.feed.push({
+              info: "One of their favorite teams:" + response.favorite_teams[0].name,
+              img: null
+            });
+          }
+          if(response.political != undefined){
+            fbFeed.feed.push({
+              info: "Political beliefs: " + response.political,
+              img: null
+            });
+          }
+          if(response.education != undefined){
+            fbFeed.feed.push({
+              info: "Last education experience:" + response.education[response.education.length-1].school.name,
+              img: null
+            });
+          }
 
           return fbFeed;
       })
       .catch(e => {
-        console.log("FACEBOOK ERROR", e);
+        console.log("FACEBOOK API CALL ERROR", e);
       })
   },
   getLinkedInFeed(){
@@ -91,34 +132,45 @@ var Api = {
         var linkedinFeed = {};
         linkedinFeed.feed = [];
 
-        linkedinFeed.feed.push({
-          //headline
-          info: "Headline: " + data.headline,
-          img: null
-        });
+        if(data.headline != undefined){
+          linkedinFeed.feed.push({
+            //headline
+            info: "Headline: " + data.headline,
+            img: null
+          });
+        }
+        if(data.positions != undefined && data.positions.values != undefined){
+          var currentPosition = data.positions.values[0];
 
-        linkedinFeed.feed.push({
-          //curent job
-          info: "Current Job: " + data.positions.values[0].company.name +
-          " - " + data.positions.values[0].title,
-          img: null
-        });
-       //location
-        linkedinFeed.feed.push({
-          info: "Location: " + data.positions.values[0].location.name,
-          img: null
-        });
-        //date
-        linkedinFeed.feed.push({
-            info: "Date: " + data.positions.values[0].startDate.year,
-          img: null
-        });
-
-        linkedinFeed.feed.push({
-          info: "Industry: " + data.industry,
-          img: null
-        });
-
+          if(currentPosition.company != undefined){
+            linkedinFeed.feed.push({
+              //curent job
+              info: "Current Job: " + currentPosition.company.name +
+              " - " + currentPosition.title,
+              img: null
+            });
+          }
+          if(currentPosition.location != undefined){
+            //location
+             linkedinFeed.feed.push({
+               info: "Location: " + currentPosition.location.name,
+               img: null
+             });
+          }
+          if(currentPosition.startDate != undefined){
+            //date
+            linkedinFeed.feed.push({
+                info: "Date: " + currentPosition.startDate.year,
+              img: null
+            });
+          }
+        }
+        if(data.industry != undefined){
+          linkedinFeed.feed.push({
+            info: "Industry: " + data.industry,
+            img: null
+          });
+        }
         return linkedinFeed;
     })
     .catch(e => {
@@ -151,8 +203,6 @@ var Api = {
     .then(data => {
         var twitterFeed = {};
         twitterFeed.feed = [];
-
-        console.log("TWITTER DATA:", data);
 
         for(var i=0; i < 3; i++){
           twitterFeed.feed.push({

@@ -32,6 +32,9 @@ export default class Home extends Component {
 
     this.state = {
       isLoading: true,
+      user: {
+        name: "Loading..."
+      }
     };
   }
 
@@ -39,9 +42,14 @@ export default class Home extends Component {
     AsyncStorage.getItem(LOCAL_STORE_KEYS.FacebookToken)
     .then((fbToken) => {
       console.log('FBTOKEN:', fbToken);
-        Api.getFacebookFeed(fbToken)
+        Api.getFacebookProfile(fbToken)
         .then((response) => {
-          console.log(response);
+          this.setState({
+            user: {
+              name: response.name,
+              pictureUri: response.picture.data.url
+            }
+          });
         })
     }).catch((e) => {
         console.log(e);
@@ -49,6 +57,7 @@ export default class Home extends Component {
   }
 
   render() {
+    var user = this.state.user;
     return (
       <View style={styles.container}>
         <Nav toProfile={() => this.props.navigator.push({id: 'profile'})}
@@ -118,10 +127,10 @@ export default class Home extends Component {
                   <View style={styles.eventAttendeesRow}>
                     <View style={styles.attendeeInfoView}>
                       <Image source={{
-                        uri: 'https://avatars1.githubusercontent.com/u/9463467?v=3&s=400'
+                        uri: user.pictureUri
                       }} style={styles.imageCircle}/>
                       <Text style={styles.nameText}>
-                        Barrett Davis
+                        {user.name}
                       </Text>
                     </View>
                     <View style={styles.attendeeInfoIndicatorView}>
@@ -135,10 +144,10 @@ export default class Home extends Component {
                   <View style={styles.eventAttendeesRow}>
                     <View style={styles.attendeeInfoView}>
                       <Image source={{
-                        uri: 'https://avatars1.githubusercontent.com/u/14258175?v=3&u=3247df93f2a720166734a19eea9c6eaa2074e080&s=400'
+                        uri: 'https://avatars1.githubusercontent.com/u/9463467?v=3&s=400'
                       }} style={styles.imageCircle}/>
                       <Text style={styles.nameText}>
-                        Taylor Ereio
+                        Barrett Davis
                       </Text>
                     </View>
                     <View style={styles.attendeeInfoIndicatorView}>

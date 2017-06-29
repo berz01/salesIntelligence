@@ -23,6 +23,7 @@ export default class WebViewer extends Component {
       fetch('https://salesintel.herokuapp.com/api/v1/facebook/token')
       .then(response => response.json())
       .then((data) => {
+        console.log('DATA', data);
         var token = data.fbToken;
 
         var expiredTimestamp = new Date().getTime() - (2 * 60 * 60 * 1000);

@@ -37,7 +37,7 @@ const LOCAL_STORE_KEYS = require('../../containers/storagekeys');
 const styles = require('./styles');
 const MKCustomColors = require('./colors');
 const FBSDK = require('react-native-fbsdk');
-
+import ActionButton from 'react-native-action-button';
 
 const {
   LoginButton,
@@ -113,9 +113,22 @@ export default class Signup extends Component {
           toHome={() => this.props.navigator.replace({id:'home'})}
           />
           <View style={{ flex: 1 }}>
-          <CircleButton onPressButtonTop={this.loadFacebookPermissions}>
-            <CircleButton name="facebook" color="#ffffff" size={85}/>
-          </CircleButton>
+            <FacebookFab onPress={() => this.props.navigator.push({id: 'WebViewer',
+              url: 'https://salesintel.herokuapp.com/api/v1/facebook/auth'})}>
+              <IconA name="facebook" color="#ffffff" size={30}/>
+            </FacebookFab>
+            <InstagramFab onPress={this.loadFacebookPermissions}>
+              <IconA name="instagram" color="#ffffff" size={30}/>
+            </InstagramFab>
+            <TwitterFab onPress={this.loadFacebookPermissions}>
+              <IconA name="twitter" color="#ffffff" size={30}/>
+            </TwitterFab>
+            <PinterestFab onPress={this.loadFacebookPermissions}>
+              <IconA name="pinterest" color="#ffffff" size={30}/>
+            </PinterestFab>
+            <LinkedInFab onPress={this.loadFacebookPermissions}>
+              <IconA name="linkedin" color="#ffffff" size={30}/>
+            </LinkedInFab>
           </View>
       </View>
     )
