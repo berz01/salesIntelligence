@@ -18,9 +18,9 @@ var Api = {
       }
 
       if(response.work != undefined){
-        profile.occupation = response.work.position.title + " at " + response.work.employer.name ,
+        profile.occupation = response.work.position.title + " at " + response.work.employer.name;
       }
- 
+
       if(response.work != undefined){
         var startdate = start_date != "0000-00" ? " since " + response.work.start_date : "";
         profile.feed.push({
