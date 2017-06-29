@@ -46,10 +46,13 @@ export default StyleSheet.create({
   },
   insights:{
     color: '#ffffff',
-    minHeight: 50,
+    minHeight: 30,
     justifyContent: 'flex-end',
     alignItems: 'center',
     fontSize: 16,
+    borderBottomColor:  'rgba(255, 255, 255, 0.75)',
+    borderBottomWidth: 2,
+    paddingBottom:10
   },
   heroText:{
     color: '#ffffff',

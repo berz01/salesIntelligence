@@ -64,6 +64,8 @@ export default class Profile extends Component {
       return <IconA name="instagram" color="#ffffff" size={25} />
     } else if(name == 'twitter'){
       return <IconA name="twitter" color="#ffffff" size={25} />
+    } else {
+      return <IconA name="times-circle" color="#ffffff" size={25} />
     }
   }
 
@@ -85,7 +87,7 @@ export default class Profile extends Component {
     .then((fbToken) => {
       console.log('FBTOKEN:', fbToken);
 
-      Promise.all([Api.getProfile(),
+      Promise.all([Api.getProfile(fbToken),
         Api.getFacebookFeed(fbToken),
         Api.getLinkedInFeed(),
         Api.getInstagramFeed(),
@@ -100,13 +102,17 @@ export default class Profile extends Component {
             profileHeadline: responses[0].profileHeadline,
             fbFeed: this.state.fbFeed.cloneWithRows( responses[1].feed),
             linkedinFeed: this.state.linkedinFeed.cloneWithRows( responses[2].feed),
-            instagramFeed: this.state.instagramFeed.cloneWithRows( responses[3].feed),
           };
 
-          if(responses[4] != undefined){
-            newState += {  'twitterFeed': this.state.twitterFeed.cloneWithRows( responses[4].feed) }
+          if(responses[3] != undefined){
+            newState.instagramFeed = this.state.twitterFeed.cloneWithRows( responses[3].feed);
           }
-          _this.setState(newState);
+
+          if(responses[4] != undefined){
+            newState.twitterFeed = this.state.twitterFeed.cloneWithRows( responses[4].feed);
+          }
+
+          this.setState(newState);
         })
         .catch(e => {
           console.log("EXCEPTION FOR ALL PROMISES", e);
@@ -153,8 +159,11 @@ export default class Profile extends Component {
                   renderRow={(rowData) =>
                     <View style={{flex:1,flexDirection:'row'}}>
                     {this.renderSocialNetworkIcon(rowData.network)}
-                    <Text style={custom.contentText}> {rowData.info} </Text>
+                      <View style={styles.feedColumn}>
+                      {this.renderImage(rowData.img)}
+                      {this.renderText(rowData.info)}
                     </View>
+                  </View>
                   }
                 />
               </View>

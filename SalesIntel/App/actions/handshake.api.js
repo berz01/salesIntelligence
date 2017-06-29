@@ -12,14 +12,18 @@ var Api = {
         img: null
       }
 
+      console.log("FACEBOOK API DATA", response);
+
       profile.profileData = {
         name: response.name,
-        pictureUri: response.picture.data.uri
+        pictureUri: response.picture.data.url
       }
 
       if(response.work != undefined){
         profile.occupation = response.work.position.title + " at " + response.work.employer.name;
       }
+
+      profile.feed = [];
 
       if(response.work != undefined){
         var startdate = start_date != "0000-00" ? " since " + response.work.start_date : "";
@@ -50,8 +54,15 @@ var Api = {
           info: "Cover photo",
           img: response.cover.source
         });
-      }
+      } 
 
+      if(profile.feed.length == 0){
+        profile.feed.push({
+          network: "",
+          info: "No immediate insights available",
+          img: null
+        });
+      }
         return profile;
     })
     .catch(e => {
@@ -204,11 +215,13 @@ var Api = {
         var twitterFeed = {};
         twitterFeed.feed = [];
 
-        for(var i=0; i < 3; i++){
-          twitterFeed.feed.push({
-            info: data.statuses[i].text,
-            img: null
-          });
+        if(data != undefined && data.errors == undefined){
+          for(var i=0; i < 3; i++){
+            twitterFeed.feed.push({
+              info: data.statuses[i].text,
+              img: null
+            });
+          }
         }
 
         return twitterFeed;

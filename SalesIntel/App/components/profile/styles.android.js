@@ -10,7 +10,7 @@ export default StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'stretch',
-    backgroundColor: '#F5FCFF',  
+    backgroundColor: '#F5FCFF',
   },
   spinnerContainer: {
     flex: 1,
@@ -63,6 +63,16 @@ export default StyleSheet.create({
       justifyContent: 'flex-start',
       paddingVertical:10,
       paddingRight:10,
+      borderBottomColor:  'rgba(255, 255, 255, 0.5)',
+      borderBottomWidth: StyleSheet.hairlineWidth,
+  },
+  feedColumn: {
+      flex:1,
+      flexDirection:'column',
+      alignItems: 'flex-start',
+      justifyContent: 'flex-start',
+      paddingVertical:10,
+      paddingLeft:5,
       borderBottomColor:  'rgba(255, 255, 255, 0.5)',
       borderBottomWidth: StyleSheet.hairlineWidth,
   },
